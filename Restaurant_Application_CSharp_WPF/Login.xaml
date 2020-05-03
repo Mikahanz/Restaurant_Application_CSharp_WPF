@@ -24,7 +24,7 @@
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
-            <Button Grid.Row="0" Grid.Column="4" HorizontalAlignment="Right"  VerticalAlignment="Top" Height="30" Width="60" Content="Close" Background="#FF1492B8">
+            <Button x:Name="btnCloseLogin" Click="btnCloseLogin_Click" Grid.Row="0" Grid.Column="4" HorizontalAlignment="Right"  VerticalAlignment="Top" Height="30" Width="60" Content="Close" Background="#FF1492B8">
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="10"/>
@@ -103,14 +103,14 @@
                     </Style>
                 </Button.Resources>
             </Button>
-            <Button Width="70" Height="70" Content="Enter" Grid.Column="3" Grid.Row="4" FontSize="28" Background="#FF1492B8" >
+            <Button x:Name="btnEnterLogin" Click="btnEnterLogin_Click" Width="70" Height="70" Content="Enter" Grid.Column="3" Grid.Row="4" FontSize="28" Background="#FF1492B8" >
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="10"/>
                     </Style>
                 </Button.Resources>
             </Button>
-            <Button Width="70" Height="70" Content="Clear" Grid.Column="1" Grid.Row="4" FontSize="28" Background="#FF1492B8">
+            <Button x:Name="btnClearLogin" Click="btnClearLogin_Click" Width="70" Height="70" Content="Clear" Grid.Column="1" Grid.Row="4" FontSize="28" Background="#FF1492B8">
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="10"/>

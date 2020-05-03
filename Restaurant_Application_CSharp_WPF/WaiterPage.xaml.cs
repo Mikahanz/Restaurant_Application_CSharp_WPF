@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Restaurant_Application_CSharp_WPF.Service;
 
 namespace Restaurant_Application_CSharp_WPF
 {
@@ -19,28 +20,44 @@ namespace Restaurant_Application_CSharp_WPF
     /// </summary>
     public partial class WaiterPage : Window
     {
-        public WaiterPage()
+        public UserLoginState user { get; set; }
+        public WaiterPage(UserLoginState user)
         {
+            this.user = user;
+
             InitializeComponent();
+            
+            //MessageBox.Show($"empid: {user.empId}, name: {user.FullName}, userTypE: {user.EmployeeType}, isuserlogin: {user.IsLoggedIn}");
 
-            Student student = new Student();
-            List<Student> students = student.generateStudents();
+            lblEmpName.Content = user.FullName;
+            tbPageTitle.Text = user.EmployeeType;
 
-            PhoneNumbers phoneNumber = new PhoneNumbers();
-            List<PhoneNumbers> phoneNumbers = phoneNumber.generatePhoneNumbers();
+            // populate order table
+            dgOrders.ItemsSource = Services.GetOrderDetails(user.empId);
 
-            //Query syntax
-            var studentsList = from stu in students
-                               where stu.Gender == Gender.Male
-                               select stu;
+            // Populata restaurant table
+            dgTables.ItemsSource = Services.GetrestaurantTables();
 
-            dgOrders.ItemsSource = studentsList;
-            dgTables.ItemsSource = studentsList;
+
         }
 
         private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
+        }
+
+        private void dgOrders_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            dynamic od = dgOrders.SelectedItem;
+            int orderId = od.OrderNo;
+            int tableId = od.TableNo;
+
+            //MessageBox.Show($"orderid: {orderId}, table no: {tableId}");
+
+            OrderDetail ord = new OrderDetail(orderId, tableId);
+
+            ord.Show();
+            
         }
     }
 }

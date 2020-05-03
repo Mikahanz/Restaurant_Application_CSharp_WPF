@@ -45,7 +45,7 @@
                         <ColumnDefinition Width="11*"></ColumnDefinition>
                         <ColumnDefinition Width="2*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <DataGrid x:Name="dgOrders" RowBackground="#FF4D4B4B" Background="#FF4D4B4B">
+                    <DataGrid x:Name="dgOrders" MouseDoubleClick="dgOrders_MouseDoubleClick" RowBackground="#FF4D4B4B" Background="#FF4D4B4B">
 
                     </DataGrid>
                     <Grid Grid.Column="1" Margin="5">
@@ -88,6 +88,7 @@
                     </Grid>
                 </Grid>
             </TabItem>
+            
             <TabItem Header="Tables" Background="#FF4D4B4B" >
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -119,7 +120,7 @@
                 </Style>
             </Button.Resources>
         </Button>
-        <TextBlock Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="30" Foreground="Black">Waiter</TextBlock>
+        <TextBlock x:Name="tbPageTitle" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="30" Foreground="Black"></TextBlock>
         <TextBlock x:Name="txtblkEmpName" Grid.Row="0" Grid.Column="1" VerticalAlignment="TOp" HorizontalAlignment="Left" FontSize="15" Foreground="Black" Margin="10,0,0,0">
             <Label x:Name="lblEmpText" Content="Employee Name:"></Label>
             <Label x:Name="lblEmpName" Content="Michael"></Label>
