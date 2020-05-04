@@ -121,7 +121,7 @@
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Width="70" Header="Product No" DisplayMemberBinding="{Binding ProdId}"/>
-                        <GridViewColumn Width="265" Header="Product Name" DisplayMemberBinding="{Binding ProdName}"/>
+                        <GridViewColumn Width="260" Header="Product Name" DisplayMemberBinding="{Binding ProdName}"/>
                         <GridViewColumn Width="50" Header="Quantity"  DisplayMemberBinding="{Binding ProdQuantity}"/>
                     </GridView>
                 </ListView.View>

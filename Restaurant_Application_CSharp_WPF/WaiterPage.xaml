@@ -45,7 +45,26 @@
                         <ColumnDefinition Width="11*"></ColumnDefinition>
                         <ColumnDefinition Width="2*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <DataGrid x:Name="dgOrders" MouseDoubleClick="dgOrders_MouseDoubleClick" RowBackground="#FF83959B" Background="#FF83959B" IsReadOnly="True" AlternatingRowBackground="#FF9CB2B9">
+                    <DataGrid x:Name="dgOrders" 
+                              MouseDoubleClick="dgOrders_MouseDoubleClick" 
+                              RowBackground="#FF83959B" 
+                              Background="#FF83959B" 
+                              AutoGenerateColumns="False" 
+                              AlternatingRowBackground="#FF9CB2B9"
+                              VerticalScrollBarVisibility="Auto" 
+                              IsReadOnly="True" 
+                              CanUserAddRows="False"
+                              SelectionMode="Single"
+                              CanUserResizeColumns="False"
+                              CanUserResizeRows="False"
+                              ScrollViewer.CanContentScroll="True">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Employee No" Binding="{Binding EmpId}" Width="*"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Table No" Binding="{Binding TableNo}" Width="*"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Order No" Binding="{Binding OrderNo}" Width="*"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Time" Binding="{Binding CreationTime}" Width="*"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Employee" Binding="{Binding Employee}" Width="*"></DataGridTextColumn>
+                        </DataGrid.Columns>
 
                     </DataGrid>
                     <Grid Grid.Column="1" Margin="5">
@@ -70,15 +89,7 @@
                                     <Setter Property="CornerRadius" Value="5"/>
                                 </Style>
                             </Button.Resources>
-                        </Button>
-                        
-                        <!--<Button x:Name="btnPrintReceipt" Grid.Row="2" VerticalAlignment="Bottom" Height="30" Width="80" Content="Print Reciept" Background="#FF1492B8">
-                            <Button.Resources>
-                                <Style TargetType="Border">
-                                    <Setter Property="CornerRadius" Value="5"/>
-                                </Style>
-                            </Button.Resources>
-                        </Button>-->
+                        </Button>                        
                     </Grid>
                 </Grid>
             </TabItem>
@@ -86,11 +97,30 @@
             <TabItem Header="Tables" Background="#FF83959B" >
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="25*"></ColumnDefinition>
-                        <ColumnDefinition Width="458*"/>
-                        <ColumnDefinition Width="483*"></ColumnDefinition>
+                        <ColumnDefinition Width="17*"></ColumnDefinition>
+                        <ColumnDefinition Width="46*"/>
+                        <ColumnDefinition Width="270*"/>
+                        <ColumnDefinition Width="333*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <DataGrid x:Name="dgTables" RowBackground="#FF83959B" Grid.ColumnSpan="2" Background="#FF83959B" IsReadOnly="True" AlternatingRowBackground="#FF9CB2B9">
+                    <DataGrid x:Name="dgTables" 
+                              Grid.ColumnSpan="3" 
+                              RowBackground="#FF83959B" 
+                              Background="#FF83959B" 
+                              AutoGenerateColumns="False" 
+                              AlternatingRowBackground="#FF9CB2B9"
+                              VerticalScrollBarVisibility="Auto" 
+                              IsReadOnly="True" 
+                              CanUserAddRows="False"
+                              SelectionMode="Single"
+                              CanUserResizeColumns="False"
+                              CanUserResizeRows="False"
+                              ScrollViewer.CanContentScroll="True">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Width="*" Header="Table No" Binding="{Binding TableNo}"/>
+                            <DataGridTextColumn Width="*" Header="Capacity" Binding="{Binding Capacity}"/>
+                            <DataGridTextColumn Width="*" Header="Availability"  Binding="{Binding Availability}"/>
+                        </DataGrid.Columns>
+                        
                     </DataGrid>
 
                 </Grid>

@@ -108,8 +108,15 @@ namespace Restaurant_Application_CSharp_WPF
         }
 
         private void btnRemove_Click(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show("button remove");
+        {           
+
+            NewProduct newProduct = new NewProduct();
+            newProduct = lvProductAdded.SelectedItem as NewProduct;
+
+            theNewOrder.Remove(newProduct);
+            RefreshProductList();
+            //MessageBox.Show(newProduct.ProdName.ToString());
+
         }
 
         // Refresh Product list Method
