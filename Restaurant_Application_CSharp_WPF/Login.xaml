@@ -6,9 +6,9 @@
         xmlns:local="clr-namespace:Restaurant_Application_CSharp_WPF"
         mc:Ignorable="d"
         Title="Login" Height="450" Width="450" WindowStartupLocation="CenterScreen"
-        WindowStyle="None" Background="#FF4D4B4B">
+        WindowStyle="None" Background="#FF83959B">
 
-    <Grid Background="#FF4D4B4B">
+    <Grid Background="#FF83959B">
         <Grid Margin="20">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition></ColumnDefinition>

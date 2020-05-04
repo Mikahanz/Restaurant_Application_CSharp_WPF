@@ -61,7 +61,7 @@ namespace Restaurant_Application_CSharp_WPF
 
                 WaiterPage waiterPage = new WaiterPage(user);
                 waiterPage.Show();
-
+                this.Close();
             }
             else
             {

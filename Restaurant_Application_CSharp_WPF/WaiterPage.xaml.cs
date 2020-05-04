@@ -51,13 +51,28 @@ namespace Restaurant_Application_CSharp_WPF
             dynamic od = dgOrders.SelectedItem;
             int orderId = od.OrderNo;
             int tableId = od.TableNo;
+            DateTime time = od.CreationTime;
 
             //MessageBox.Show($"orderid: {orderId}, table no: {tableId}");
 
-            OrderDetail ord = new OrderDetail(orderId, tableId);
+            OrderDetail ord = new OrderDetail(orderId, tableId, time);
 
             ord.Show();
             
+        }
+
+        private void btnCloseWP_Click(object sender, RoutedEventArgs e)
+        {
+            user.Logout();
+            Login login = new Login();
+            login.Show();
+            this.Close();
+        }
+
+        private void btnNewOrder_Click(object sender, RoutedEventArgs e)
+        {
+            NewOrder newOrder = new NewOrder(user);
+            newOrder.Show();
         }
     }
 }

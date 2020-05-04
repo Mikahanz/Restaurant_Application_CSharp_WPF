@@ -5,16 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Restaurant_Application_CSharp_WPF"
         mc:Ignorable="d"
-        Title="UpdateOrder" Height="450" Width="1000" Foreground="#FFFFFFFF" WindowStyle="None" Background="#FF4D4B4B" WindowStartupLocation="CenterScreen">
+        Title="UpdateOrder" Height="450" Width="1000" Foreground="#FFFFFFFF" WindowStyle="None" Background="#FF83959B" WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <Style x:Key="DataGridStyle1" TargetType="{x:Type DataGrid}">
             <Setter Property="ColumnHeaderStyle" Value="{DynamicResource ColumnHeaderStyle1}"/>
-            <Setter Property="Background" Value="#FF4D4B4B"/>
+            <Setter Property="Background" Value="#FF83959B"/>
         </Style>
         <!-- DataGridColumnHeader style -->
         <Style x:Key="ColumnHeaderStyle1" TargetType="DataGridColumnHeader">
             <Setter Property="Height" Value="30"/>
-            <Setter Property="Background" Value="#FF4D4B4B"/>
+            <Setter Property="Background" Value="#FF83959B"/>
             <Setter Property="Foreground" Value="Black"/>
             <Setter Property="FontSize" Value="12" />
             <Setter Property="BorderBrush" Value="White"/>
@@ -26,10 +26,10 @@
             </Style.Triggers>
         </Style>
         <Style x:Key="DataGridBorder" TargetType="Border">
-            <Setter Property="Background" Value="#FF4D4B4B"/>
+            <Setter Property="Background" Value="#FF83959B"/>
         </Style>
     </Window.Resources>
-    <Grid Margin="10" Background="#FF4D4B4B">
+    <Grid Margin="10" Background="#FF83959B">
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"></RowDefinition>
             <RowDefinition Height="8*"></RowDefinition>

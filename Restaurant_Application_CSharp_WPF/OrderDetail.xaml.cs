@@ -21,15 +21,29 @@ namespace Restaurant_Application_CSharp_WPF
     public partial class OrderDetail : Window
     {
         
-        public OrderDetail(int orderId, int tableId)
+        public OrderDetail(int orderId, int tableId, DateTime time)
         {
             
             InitializeComponent();
 
-            lblOrderNoText.Content = orderId;
-            lblTableText.Content = tableId;
+            lblOrderNoText.Content = orderId;   // OrderId label
+            lblTableText.Content = tableId;     // TableId label
                         
-            dgOrderDetail.ItemsSource = Services.GetOrderDetailByOrderId(orderId);
+            dgOrderDetail.ItemsSource = Services.GetOrderDetailByOrderId(orderId);      // Populate table
+
+
+            decimal SubPrice = Services.GetOrderTotalPrice(orderId); // Price
+            lblSubTotalText.Content = SubPrice ;               // SubTotalPrice Label
+
+            decimal TotalPrice = Math.Round((SubPrice + (SubPrice * 0.15m)), 2);
+            lblTotalText.Content = TotalPrice; // Total Price Label
+
+            lblTimeText.Content = time;
+        }
+
+        private void btnCloseOD_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

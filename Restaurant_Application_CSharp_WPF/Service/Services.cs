@@ -45,12 +45,17 @@ namespace Restaurant_Application_CSharp_WPF.Service
         }
 
         // Get Restaurant Availability Tables
-        public static List<RestaurantTable> GetrestaurantTables()
+        public static dynamic GetrestaurantTables()
         {
             using (RestaurantEntities restaurantEntities = new RestaurantEntities())
             {
                 var restaurantTables = (from rt in restaurantEntities.RestaurantTables
-                                        select rt);
+                                        select new 
+                                        {
+                                            TableNo = rt.TableID,
+                                            Capacity = rt.Capacity,
+                                            Availability = rt.Availability
+                                        });
 
                 return restaurantTables.ToList();
             }
@@ -77,6 +82,73 @@ namespace Restaurant_Application_CSharp_WPF.Service
                                             }).Where(x => x.OrderNo == orderId);
 
                 return orderDetailByOrderId.ToList();
+            }
+        }
+
+        // Get Order Total Price
+        public static decimal GetOrderTotalPrice(int orderId)
+        {
+            using (RestaurantEntities restaurantEntities = new RestaurantEntities())
+            {
+                var OrderTotalPrice = (from od in restaurantEntities.OrderDetails
+                                       join p in restaurantEntities.Products
+                                       on od.ProductID equals p.ProductID
+                                       select new
+                                       {
+                                           OrderNo = od.OrderID,
+                                           Price = p.Price * od.Quantity
+                                       }).Where(x => x.OrderNo == orderId).Sum(p => p.Price);
+
+                return OrderTotalPrice; // return a decimal
+            }
+        }
+
+        // Get only available tables
+        public static dynamic GetAvailableTables()
+        {
+            using(RestaurantEntities restaurantEntities = new RestaurantEntities())
+            {
+                var restaurantTables = (from rt in restaurantEntities.RestaurantTables
+                                        select new
+                                        {
+                                            TableNo = rt.TableID,
+                                            Capacity = rt.Capacity,
+                                            Availability = rt.Availability
+                                        }).Where(t => t.Availability == true);
+
+                return restaurantTables.ToList();
+            }
+        }
+
+        // Get all food category
+        public static List<string> GetFoodCategory()
+        {
+            using(RestaurantEntities restaurantEntities = new RestaurantEntities())
+            {
+                
+                var productCategory = restaurantEntities.Products.GroupBy(c => c.ProductType).Select(s => s.Key);
+
+                return productCategory.ToList();
+            }
+        }
+
+        // Get Product by Category
+        public static dynamic GetProductByCategory(string type)
+        {
+            using(RestaurantEntities restaurantEntities = new RestaurantEntities())
+            {
+                var productsByCategory = (from p in restaurantEntities.Products
+                                          select new
+                                          {
+                                            ProductId = p.ProductID,
+                                            ProductName = p.ProductName,
+                                            ProductType = p.ProductType,
+                                            Price = p.Price,
+                                            Availability = p.Availability
+                                          }).Where(p => p.ProductType == type);
+
+                return productsByCategory.ToList();
+
             }
         }
     }
