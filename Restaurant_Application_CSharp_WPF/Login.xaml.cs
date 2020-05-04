@@ -40,6 +40,7 @@ namespace Restaurant_Application_CSharp_WPF
         private void btnCloseLogin_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+            System.Windows.Application.Current.Shutdown();
         }
 
         private void btnClearLogin_Click(object sender, RoutedEventArgs e)

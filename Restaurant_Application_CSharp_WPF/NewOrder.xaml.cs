@@ -27,7 +27,8 @@ namespace Restaurant_Application_CSharp_WPF
 
             InitializeComponent();
 
-            lblEmpName.Content = user.FullName;
+            lblEmpName.Content = $"Employee Name: {user.FullName}";
+            lblEmpNo.Content = $"Employee No: {user.empId}";
 
             dgTablesNO.ItemsSource = Services.GetAvailableTables();
 

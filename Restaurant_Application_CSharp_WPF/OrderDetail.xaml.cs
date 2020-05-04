@@ -45,5 +45,32 @@ namespace Restaurant_Application_CSharp_WPF
         {
             this.Close();
         }
+
+        private void btnCheckOut_Click(object sender, RoutedEventArgs e)
+        {
+            var result = MessageBox.Show("Are you sure you want to Checkout? Checkout will close the order!", "Check Out", MessageBoxButton.YesNo);
+            if (result == MessageBoxResult.Yes)
+            {
+
+                //MessageBox.Show("YESSSS");
+            }
+            else
+            {
+                //MessageBox.Show("NOOOO");
+            }
+        }
+
+        private void btnPrint_Click(object sender, RoutedEventArgs e)
+        {
+            
+
+            //Directory.CreateDirectory(newPath);
+
+            
+
+            Invoice invoice = new Invoice();
+            invoice.Show();
+
+        }
     }
 }

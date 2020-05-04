@@ -75,6 +75,7 @@
                     </Button.Resources>
                 </Button>
                 <Label Content="Category: " Grid.Column="1" VerticalAlignment="Top" Margin="40,0,0,0"></Label>
+                <Label Content="Menu" Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,25,0,0"></Label>                
                 <ComboBox x:Name="cbCategory" SelectionChanged="cbCategory_SelectionChanged" Grid.Column="1" VerticalAlignment="Top" Width="180" Margin="0,3" SelectedIndex="0"></ComboBox>
                 <DataGrid x:Name="dgProductsNO" 
                           Grid.Column="1"
@@ -157,10 +158,16 @@
                 </Style>
             </Button.Resources>
         </Button>
-        <TextBlock Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="30" Foreground="Black">Create New Order</TextBlock>
+        <TextBlock Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="30" Foreground="Black">New Order</TextBlock>
         <TextBlock x:Name="txtblkEmpName" Grid.Row="0" Grid.Column="1" VerticalAlignment="TOp" HorizontalAlignment="Left" FontSize="15" Foreground="Black" Margin="10,0,0,0">
+            <Label x:Name="lblEmpName" Content="Emp Name:"></Label>
+        </TextBlock>
+        <TextBlock x:Name="txtblkEmpNo" Grid.Row="0" Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Left" FontSize="15" Foreground="Black" Margin="10,0,0,0">
+            <Label x:Name="lblEmpNo" Content="Emp No:"></Label>
+        </TextBlock>
+        <!--<TextBlock x:Name="txtblkEmpName" Grid.Row="0" Grid.Column="1" VerticalAlignment="TOp" HorizontalAlignment="Left" FontSize="15" Foreground="Black" Margin="10,0,0,0">
             <Label x:Name="lblEmpText" Content="Employee Name:"></Label>
             <Label x:Name="lblEmpName" Content="Michael"></Label>
-        </TextBlock>
+        </TextBlock>-->
     </Grid>
 </Window>

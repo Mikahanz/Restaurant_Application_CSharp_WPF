@@ -67,6 +67,9 @@
     <Compile Include="Employee.cs">
       <DependentUpon>RestaurantDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Invoice.xaml.cs">
+      <DependentUpon>Invoice.xaml</DependentUpon>
+    </Compile>
     <Compile Include="NewOrder.xaml.cs">
       <DependentUpon>NewOrder.xaml</DependentUpon>
     </Compile>
@@ -111,6 +114,10 @@
     <Compile Include="WaiterPage.xaml.cs">
       <DependentUpon>WaiterPage.xaml</DependentUpon>
     </Compile>
+    <Page Include="Invoice.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Login.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -176,6 +183,8 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Resource Include="Images\closeicon.png" />
+    <Resource Include="Images\printer.png" />
     <Content Include="RestaurantDB.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>RestaurantDB.Context.cs</LastGenOutput>

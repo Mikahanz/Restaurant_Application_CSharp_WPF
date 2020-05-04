@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Restaurant_Application_CSharp_WPF"
         mc:Ignorable="d"
-        Title="UpdateOrder" Height="450" Width="1000" Foreground="#FFFFFFFF" WindowStyle="None" Background="#FF83959B" WindowStartupLocation="CenterScreen">
+        Title="UpdateOrder" Height="500" Width="1000" Foreground="#FFFFFFFF" WindowStyle="None" Background="#FF83959B" WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <Style x:Key="DataGridStyle1" TargetType="{x:Type DataGrid}">
             <Setter Property="ColumnHeaderStyle" Value="{DynamicResource ColumnHeaderStyle1}"/>
@@ -31,8 +31,8 @@
     </Window.Resources>
     <Grid Margin="10" Background="#FF83959B">
         <Grid.RowDefinitions>
-            <RowDefinition Height="1*"></RowDefinition>
-            <RowDefinition Height="8*"></RowDefinition>
+            <RowDefinition Height="2*"></RowDefinition>
+            <RowDefinition Height="10*"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
@@ -40,8 +40,9 @@
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="1*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Label Content="Category: " Grid.Column="0" VerticalAlignment="Top" Margin="90,0,0,0"></Label>
-            <ComboBox x:Name="cbCategoryUpd" SelectionChanged="cbCategoryUpd_SelectionChanged" Grid.Column="0" VerticalAlignment="Top" Width="180" Margin="0,3" SelectedIndex="0"></ComboBox>
+            <Label Content="Category: " Grid.Column="0" VerticalAlignment="Top" Margin="90,3,0,0"></Label>
+            <Label Content="Menu" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,30,0,0"></Label>
+            <ComboBox x:Name="cbCategoryUpd" SelectionChanged="cbCategoryUpd_SelectionChanged" Grid.Column="0" VerticalAlignment="Top" Width="180" Margin="0,5,0,3" SelectedIndex="0"></ComboBox>
             <DataGrid x:Name="dgProductsUpd" 
                           Grid.Row="0"
                           Width="350" Height="275" 
@@ -129,13 +130,23 @@
             </Button>
         </Grid>
 
-        <Grid>
+        <!--<Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="3*"/>
+                <RowDefinition Height="47*"/>
+            </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
-        </Grid>
+        </Grid>-->
+        <TextBlock x:Name="txtblkTableNo" Grid.Row="0" Grid.Column="2" VerticalAlignment="Bottom" HorizontalAlignment="Right" FontSize="15" Foreground="Black" Margin="10,0,20,0">
+            <Label x:Name="lblTableNo" Content="Table No:"></Label>
+        </TextBlock>
+        <TextBlock x:Name="txtblkOrderNo" Grid.Row="0" Grid.Column="2" VerticalAlignment="Bottom" HorizontalAlignment="Right" FontSize="15" Foreground="Black" Margin="10,0,250,0">
+            <Label x:Name="lblOrderNo" Content="Order No:"></Label>
+        </TextBlock>
         <Button x:Name="btnCloseUO" Click="btnCloseUO_Click" Grid.Row="0" Grid.Column="4" HorizontalAlignment="Right"  VerticalAlignment="Top" Height="30" Width="60" Content="Close" Background="#FF1492B8">
             <Button.Resources>
                 <Style TargetType="Border">
@@ -143,10 +154,12 @@
                 </Style>
             </Button.Resources>
         </Button>
-        <TextBlock Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="30" Foreground="Black">Update Order</TextBlock>
+        <TextBlock Grid.Row="0" Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="30" Foreground="Black">Update Order</TextBlock>
         <TextBlock x:Name="txtblkEmpNameUpd" Grid.Row="0" Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="15" Foreground="Black" Margin="10,0,0,0">
-            <Label x:Name="lblEmpTextUpd" Content="Employee Name:"></Label>
-            <Label x:Name="lblEmpNameUpd" Content="Michael"></Label>
+            <Label x:Name="lblEmpNameUpd" Content="Emp Name:"></Label>
+        </TextBlock>
+        <TextBlock x:Name="txtblkEmpNo" Grid.Row="0" Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Left" FontSize="15" Foreground="Black" Margin="10,0,0,0">
+            <Label x:Name="lblEmpNo" Content="Emp No:"></Label>
         </TextBlock>
     </Grid>
 </Window>

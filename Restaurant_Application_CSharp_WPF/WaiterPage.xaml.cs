@@ -29,7 +29,8 @@ namespace Restaurant_Application_CSharp_WPF
             
             //MessageBox.Show($"empid: {user.empId}, name: {user.FullName}, userTypE: {user.EmployeeType}, isuserlogin: {user.IsLoggedIn}");
 
-            lblEmpName.Content = user.FullName;
+            lblEmpName.Content = $"Employee Name: { user.FullName}";
+            lblEmpNo.Content = $"Employee No: {user.empId}";
             tbPageTitle.Text = user.EmployeeType;
 
             // populate order table

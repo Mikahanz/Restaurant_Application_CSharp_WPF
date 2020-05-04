@@ -36,8 +36,9 @@ namespace Restaurant_Application_CSharp_WPF.Service
                                             TableNo = oh.TableID,
                                             OrderNo = oh.OrderID,
                                             CreationTime = oh.CreationTime,
-                                            Employee = e.EmployeType
-                                        }).Where(e => e.EmpId == empid);
+                                            Employee = e.EmployeType,
+                                            IsServing = oh.IsServing
+                                        }).Where((e) => e.EmpId == empid && e.IsServing == true);
 
                 return orderDetailsJoin.ToList();
             }

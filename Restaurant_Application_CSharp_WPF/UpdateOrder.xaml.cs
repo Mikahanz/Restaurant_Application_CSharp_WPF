@@ -27,7 +27,10 @@ namespace Restaurant_Application_CSharp_WPF
 
             InitializeComponent();
 
-            lblEmpNameUpd.Content = user.FullName;
+            lblEmpNameUpd.Content = $"Employee Name: {user.FullName}";
+            lblEmpNo.Content =      $"Employee No  : {user.empId}";
+            lblOrderNo.Content = $"Order No  : {orderId}";
+            lblTableNo.Content = $"Table No  : {tableId}";
 
             cbCategoryUpd.ItemsSource = Services.GetFoodCategory();
 
