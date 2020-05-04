@@ -60,7 +60,7 @@
                           SelectionMode="Single"
                           CanUserResizeColumns="False"
                           CanUserResizeRows="False"
-                          ScrollViewer.CanContentScroll="True">
+                          ScrollViewer.CanContentScroll="True" SelectedIndex="0">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Table No" Binding="{Binding TableNo}" Width="*"></DataGridTextColumn>
                         <DataGridTextColumn Header="Total Seats" Binding="{Binding Capacity}" Width="*"></DataGridTextColumn>
@@ -75,7 +75,7 @@
                     </Button.Resources>
                 </Button>
                 <Label Content="Category: " Grid.Column="1" VerticalAlignment="Top" Margin="40,0,0,0"></Label>
-                <ComboBox x:Name="cbCategory" SelectionChanged="cbCategory_SelectionChanged" Grid.Column="1" VerticalAlignment="Top" Width="180" Margin="0,3"></ComboBox>
+                <ComboBox x:Name="cbCategory" SelectionChanged="cbCategory_SelectionChanged" Grid.Column="1" VerticalAlignment="Top" Width="180" Margin="0,3" SelectedIndex="0"></ComboBox>
                 <DataGrid x:Name="dgProductsNO" 
                           Grid.Column="1"
                           Width="350" Height="275" 
@@ -97,7 +97,7 @@
                     </DataGrid.Columns>
                 </DataGrid>
                 <Label Content="Quatity: " Grid.Column="1" VerticalAlignment="Bottom" Margin="20,0,0,10"></Label>
-                <ComboBox x:Name="cbQuantity" Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="50" Margin="70,0,0,10">
+                <ComboBox x:Name="cbQuantity" Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="50" Margin="70,0,0,10" SelectedIndex="0">
                     <ComboBoxItem>1</ComboBoxItem>
                     <ComboBoxItem>2</ComboBoxItem>
                     <ComboBoxItem>3</ComboBoxItem>

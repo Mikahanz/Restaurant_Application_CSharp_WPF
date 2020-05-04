@@ -75,6 +75,7 @@ namespace Restaurant_Application_CSharp_WPF.Service
                                             {
                                                 OrderNo = od.OrderID,
                                                 TableNo = oh.TableID,
+                                                ProductNo = p.ProductID,
                                                 ProductName = p.ProductName,
                                                 Quantity = od.Quantity,
                                                 Price = p.Price * od.Quantity,

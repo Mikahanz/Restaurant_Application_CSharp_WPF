@@ -83,7 +83,7 @@
                                 </Style>
                             </Button.Resources>
                         </Button>
-                        <Button x:Name="btnUpdate" Grid.Row="0" VerticalAlignment="Bottom" Height="30" Width="80" Content="Update" Background="#FF1492B8">
+                        <Button x:Name="btnUpdate" Click="btnUpdate_Click" Grid.Row="0" VerticalAlignment="Bottom" Height="30" Width="80" Content="Update" Background="#FF1492B8">
                             <Button.Resources>
                                 <Style TargetType="Border">
                                     <Setter Property="CornerRadius" Value="5"/>

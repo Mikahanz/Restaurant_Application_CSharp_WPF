@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Restaurant_Application_CSharp_WPF.Service;
 
 namespace Restaurant_Application_CSharp_WPF
 {
@@ -19,9 +20,33 @@ namespace Restaurant_Application_CSharp_WPF
     /// </summary>
     public partial class UpdateOrder : Window
     {
-        public UpdateOrder()
+        public UserLoginState user { get; set; }
+        public UpdateOrder(UserLoginState user, int orderId, int tableId)
         {
+            this.user = user;
+
             InitializeComponent();
+
+            lblEmpNameUpd.Content = user.FullName;
+
+            cbCategoryUpd.ItemsSource = Services.GetFoodCategory();
+
+            dgOrderDetailUpd.ItemsSource = Services.GetOrderDetailByOrderId(orderId);
+        }
+
+        private void btnCloseUO_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+            WaiterPage waiterPage = new WaiterPage(user);
+            waiterPage.Show();
+
+        }
+
+        private void cbCategoryUpd_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            string prodCategory = cbCategoryUpd.SelectedItem.ToString();   // food category from combobox
+
+            dgProductsUpd.ItemsSource = Services.GetProductByCategory(prodCategory);     // Populate Product Table
         }
     }
 }

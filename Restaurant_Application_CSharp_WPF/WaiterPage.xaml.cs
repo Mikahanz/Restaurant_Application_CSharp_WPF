@@ -74,5 +74,28 @@ namespace Restaurant_Application_CSharp_WPF
             NewOrder newOrder = new NewOrder(user);
             newOrder.Show();
         }
+
+        private void btnUpdate_Click(object sender, RoutedEventArgs e)
+        {
+            dynamic orderSelected = dgOrders.SelectedItem;
+
+
+            if(orderSelected != null)   // Datagrid selected
+            {
+                int orderId = orderSelected.OrderNo;
+                int tableId = orderSelected.TableNo;
+
+                UpdateOrder updateOrder = new UpdateOrder(user, orderId, tableId);
+                updateOrder.Show();
+
+                this.Hide();
+            }
+            else
+            {
+                MessageBox.Show("Please Select Order Detail Before Proceed!", "Order Selection Required");
+            }
+
+            
+        }
     }
 }

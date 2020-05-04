@@ -46,10 +46,10 @@
             <DataGrid x:Name="dgOrderDetail" Grid.Column="0" IsReadOnly="True" RowBackground="#FF83959B" Background="#FFAABEC5" AutoGenerateColumns="False" AlternatingRowBackground="#FF9CB2B9">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Order No" Binding="{Binding OrderNo}" Visibility="Collapsed" Width="*"></DataGridTextColumn>
-                    <DataGridTextColumn Header="Table No" Binding="{Binding TableNo}" Width="*"></DataGridTextColumn>
-                    <DataGridTextColumn Header="Product Name" Binding="{Binding ProductName}" Width="*"></DataGridTextColumn>
-                    <DataGridTextColumn Header="Quantity" Binding="{Binding Quantity}" Width="*"></DataGridTextColumn>
-                    <DataGridTextColumn Header="Price" Binding="{Binding Price}" Width="*"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Product No" Binding="{Binding ProductNo}" Width="1*"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Product Name" Binding="{Binding ProductName}" Width="3*"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Quantity" Binding="{Binding Quantity}" Width="1*"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Price" Binding="{Binding Price}" Width="1*"></DataGridTextColumn>
                     <DataGridTextColumn Header="Ready" Binding="{Binding Ready}" Visibility="Collapsed" Width="*"></DataGridTextColumn>
                 </DataGrid.Columns>
             </DataGrid>
