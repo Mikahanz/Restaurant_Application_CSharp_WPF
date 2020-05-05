@@ -74,6 +74,8 @@ namespace Restaurant_Application_CSharp_WPF
         {
             NewOrder newOrder = new NewOrder(User);
             newOrder.Show();
+
+            this.Hide();
         }
 
         private void btnUpdate_Click(object sender, RoutedEventArgs e)

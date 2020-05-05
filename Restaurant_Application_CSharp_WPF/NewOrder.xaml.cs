@@ -156,42 +156,95 @@ namespace Restaurant_Application_CSharp_WPF
         {
             //MessageBox.Show($"empid: {this.user.empId}, tableid: {this.TableNo}, Creation time:{DateTime.Now:MMMM-dd-yyyy H:mm:ss}");
 
-            // Insert to OrderHeader
-            //OrderHeader orderHeader = new OrderHeader()
-            //{
-            //    EmpID = this.user.empId,
-            //    TableID = this.TableNo,
-            //    CreationTime = DateTime.Now,
-            //    TotalPrice = null,
-            //    IsServing = true,
-            //    DiningIn = true
-            //};
-
-            //using (RestaurantEntities restaurantEntities = new RestaurantEntities())
-            //{
-            //    restaurantEntities.OrderHeaders.Add(orderHeader);
-            //    try
-            //    {
-            //        restaurantEntities.SaveChanges();
-            //    }
-            //    catch(DbUpdateException ex)
-            //    {
-            //        MessageBox.Show(ex.Message);
-            //    }
-            //}
-
-            //MessageBox.Show(orderHeader.OrderID.ToString());
-            //MessageBox.Show(theNewOrder.Count().ToString());
-
-            for(int i = 0; i < theNewOrder.Count(); i++)
+            // Check if list is empty
+            if (lvProductAdded.Items.Count < 1)
             {
-                //MessageBox.Show($"{ theNewOrder[i].ProdId}, Quantity: {theNewOrder[i].ProdQuantity}");
-                using( RestaurantEntities restaurantEntities = new RestaurantEntities())
-                {
-                   //
-                }
+                MessageBox.Show("Please Add Item To Cart", "Order Card Is Empty!");
             }
+            else
+            {
+                // Insert to OrderHeader
+                OrderHeader orderHeader = new OrderHeader()
+                {
+                    EmpID = this.user.empId,
+                    TableID = this.TableNo,
+                    CreationTime = DateTime.Now,
+                    TotalPrice = null,
+                    IsServing = true,
+                    DiningIn = true
+                };
 
+                using (RestaurantEntities restaurantEntities = new RestaurantEntities())
+                {
+                    restaurantEntities.OrderHeaders.Add(orderHeader);
+                    try
+                    {
+                        restaurantEntities.SaveChanges();
+                    }
+                    catch (DbUpdateException ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+                }
+
+                //MessageBox.Show(orderHeader.OrderID.ToString());
+                //MessageBox.Show(theNewOrder.Count().ToString());
+
+                // Insert to OrderDetail
+                for (int i = 0; i < theNewOrder.Count(); i++)
+                {
+                    //MessageBox.Show($"{ theNewOrder[i].ProdId}, Quantity: {theNewOrder[i].ProdQuantity}");
+                    using (RestaurantEntities restaurantEntities = new RestaurantEntities())
+                    {
+                        OrderDetail orderDetail = new OrderDetail()
+                        {
+                            OrderID = orderHeader.OrderID,
+                            ProductID = theNewOrder[i].ProdId,
+                            Quantity = theNewOrder[i].ProdQuantity,
+                            IsReady = false
+                        };
+
+                        restaurantEntities.OrderDetails.Add(orderDetail);
+
+                        try
+                        {
+                            restaurantEntities.SaveChanges();
+                        }
+                        catch (DbUpdateException ex)
+                        {
+                            MessageBox.Show(ex.Message);
+                        }
+                    }
+                }
+
+                // Update RestaurantTable Availability
+                using(RestaurantEntities restaurantEntities = new RestaurantEntities())
+                {
+                    RestaurantTable restaurantTable = new RestaurantTable();
+                    restaurantTable = restaurantEntities.RestaurantTables.Find(this.TableNo);
+
+                    restaurantTable.Availability = false;
+
+                    try
+                    {
+                        restaurantEntities.SaveChanges();
+                    }
+                    catch(DbUpdateException ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+                }
+
+                // Show Insertion Sucessful
+                MessageBox.Show($"New Order {orderHeader.OrderID} Has Been Successfully Created!", "New Order Created Successfully");
+
+                // Open waiter page
+                WaiterPage waiterPage = new WaiterPage(user);
+                waiterPage.Show();
+
+                // close this page
+                this.Close();
+            }
         }
     }
 
