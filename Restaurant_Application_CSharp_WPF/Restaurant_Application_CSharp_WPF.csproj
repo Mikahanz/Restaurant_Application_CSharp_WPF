@@ -82,6 +82,9 @@
     <Compile Include="OrderHeader.cs">
       <DependentUpon>RestaurantDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="OrderInfo.xaml.cs">
+      <DependentUpon>OrderInfo.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Product.cs">
       <DependentUpon>RestaurantDB.tt</DependentUpon>
     </Compile>
@@ -135,6 +138,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="OrderDetail.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="OrderInfo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

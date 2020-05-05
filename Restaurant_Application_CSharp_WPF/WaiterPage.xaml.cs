@@ -56,7 +56,7 @@ namespace Restaurant_Application_CSharp_WPF
 
             //MessageBox.Show($"orderid: {orderId}, table no: {tableId}");
 
-            OrderDetail ord = new OrderDetail(User,orderId, tableId, time);
+            OrderInfo ord = new OrderInfo(User,orderId, tableId, time);
 
             ord.Show();
             

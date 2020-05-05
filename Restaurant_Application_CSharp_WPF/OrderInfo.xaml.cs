@@ -15,8 +15,10 @@ using Restaurant_Application_CSharp_WPF.Service;
 
 namespace Restaurant_Application_CSharp_WPF
 {
-    
-    public partial class OrderDetail : Window
+    /// <summary>
+    /// Interaction logic for OrderInfo.xaml
+    /// </summary>
+    public partial class OrderInfo : Window
     {
 
         public UserLoginState User { get; set; }
@@ -27,33 +29,33 @@ namespace Restaurant_Application_CSharp_WPF
         public int OrderId { get; set; }
         public DateTime Time { get; set; }
 
-        
 
-        public OrderDetail(UserLoginState user, int orderId, int tableId, DateTime time)
+
+        public OrderInfo(UserLoginState user, int orderId, int tableId, DateTime time)
         {
-            
+
             InitializeComponent();
 
-            //this.User = user;
-            //this.TableId = tableId;
-            //this.OrderId = orderId;
-            //this.Time = time;
+            this.User = user;
+            this.TableId = tableId;
+            this.OrderId = orderId;
+            this.Time = time;
 
-            //lblOrderNoText.Content = orderId;   // OrderId label
-            //lblTableText.Content = tableId;     // TableId label
-                        
-            //dgOrderDetail.ItemsSource = Services.GetOrderDetailByOrderId(orderId);      // Populate table
+            lblOrderNoText.Content = orderId;   // OrderId label
+            lblTableText.Content = tableId;     // TableId label
+
+            dgOrderDetail.ItemsSource = Services.GetOrderDetailByOrderId(orderId);      // Populate table
 
 
-            //this.SubPrice = Services.GetOrderTotalPrice(orderId); // Price
-            //lblSubTotalText.Content = this.SubPrice ;               // SubTotalPrice Label
+            this.SubPrice = Services.GetOrderTotalPrice(orderId); // Price
+            lblSubTotalText.Content = this.SubPrice;               // SubTotalPrice Label
 
-            //this.TotalPrice = Math.Round((SubPrice + (SubPrice * 0.15m)), 2);
-            //lblTotalText.Content = this.TotalPrice; // Total Price Label
+            this.TotalPrice = Math.Round((SubPrice + (SubPrice * 0.15m)), 2);
+            lblTotalText.Content = this.TotalPrice; // Total Price Label
 
-            //lblTimeText.Content = this.Time;
+            lblTimeText.Content = this.Time;
 
-            
+
         }
 
         private void btnCloseOD_Click(object sender, RoutedEventArgs e)
@@ -77,8 +79,8 @@ namespace Restaurant_Application_CSharp_WPF
 
         private void btnPrint_Click(object sender, RoutedEventArgs e)
         {
-            
-                                
+
+
             Invoice invoice = new Invoice(this.User, this.TotalPrice, this.SubPrice, this.TableId, this.OrderId, this.Time);
             invoice.Show();
 
