@@ -15,16 +15,29 @@ using Restaurant_Application_CSharp_WPF.Service;
 
 namespace Restaurant_Application_CSharp_WPF
 {
-    /// <summary>
-    /// Interaction logic for OrderDetail.xaml
-    /// </summary>
+    
     public partial class OrderDetail : Window
     {
+
+        public UserLoginState User { get; set; }
+
+        public decimal TotalPrice { get; set; }
+        public decimal SubPrice { get; set; }
+        public int TableId { get; set; }
+        public int OrderId { get; set; }
+        public DateTime Time { get; set; }
+
         
-        public OrderDetail(int orderId, int tableId, DateTime time)
+
+        public OrderDetail(UserLoginState user, int orderId, int tableId, DateTime time)
         {
             
             InitializeComponent();
+
+            this.User = user;
+            this.TableId = tableId;
+            this.OrderId = orderId;
+            this.Time = time;
 
             lblOrderNoText.Content = orderId;   // OrderId label
             lblTableText.Content = tableId;     // TableId label
@@ -32,13 +45,15 @@ namespace Restaurant_Application_CSharp_WPF
             dgOrderDetail.ItemsSource = Services.GetOrderDetailByOrderId(orderId);      // Populate table
 
 
-            decimal SubPrice = Services.GetOrderTotalPrice(orderId); // Price
-            lblSubTotalText.Content = SubPrice ;               // SubTotalPrice Label
+            this.SubPrice = Services.GetOrderTotalPrice(orderId); // Price
+            lblSubTotalText.Content = this.SubPrice ;               // SubTotalPrice Label
 
-            decimal TotalPrice = Math.Round((SubPrice + (SubPrice * 0.15m)), 2);
-            lblTotalText.Content = TotalPrice; // Total Price Label
+            this.TotalPrice = Math.Round((SubPrice + (SubPrice * 0.15m)), 2);
+            lblTotalText.Content = this.TotalPrice; // Total Price Label
 
-            lblTimeText.Content = time;
+            lblTimeText.Content = this.Time;
+
+            
         }
 
         private void btnCloseOD_Click(object sender, RoutedEventArgs e)
@@ -63,12 +78,8 @@ namespace Restaurant_Application_CSharp_WPF
         private void btnPrint_Click(object sender, RoutedEventArgs e)
         {
             
-
-            //Directory.CreateDirectory(newPath);
-
-            
-
-            Invoice invoice = new Invoice();
+                                
+            Invoice invoice = new Invoice(this.User, this.TotalPrice, this.SubPrice, this.TableId, this.OrderId, this.Time);
             invoice.Show();
 
         }

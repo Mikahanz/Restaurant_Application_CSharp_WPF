@@ -181,8 +181,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
+    <Folder Include="Files\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\restaurantlogo.png" />
     <Resource Include="Images\closeicon.png" />
     <Resource Include="Images\printer.png" />
     <Content Include="RestaurantDB.Context.tt">

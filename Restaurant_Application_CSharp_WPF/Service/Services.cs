@@ -79,6 +79,7 @@ namespace Restaurant_Application_CSharp_WPF.Service
                                                 ProductNo = p.ProductID,
                                                 ProductName = p.ProductName,
                                                 Quantity = od.Quantity,
+                                                EachPrice = p.Price,
                                                 Price = p.Price * od.Quantity,
                                                 Ready = od.IsReady
                                             }).Where(x => x.OrderNo == orderId);

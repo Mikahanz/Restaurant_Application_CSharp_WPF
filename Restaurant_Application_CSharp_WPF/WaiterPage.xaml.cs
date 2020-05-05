@@ -20,10 +20,10 @@ namespace Restaurant_Application_CSharp_WPF
     /// </summary>
     public partial class WaiterPage : Window
     {
-        public UserLoginState user { get; set; }
+        public UserLoginState User { get; set; }
         public WaiterPage(UserLoginState user)
         {
-            this.user = user;
+            this.User = user;
 
             InitializeComponent();
             
@@ -56,7 +56,7 @@ namespace Restaurant_Application_CSharp_WPF
 
             //MessageBox.Show($"orderid: {orderId}, table no: {tableId}");
 
-            OrderDetail ord = new OrderDetail(orderId, tableId, time);
+            OrderDetail ord = new OrderDetail(User,orderId, tableId, time);
 
             ord.Show();
             
@@ -64,7 +64,7 @@ namespace Restaurant_Application_CSharp_WPF
 
         private void btnCloseWP_Click(object sender, RoutedEventArgs e)
         {
-            user.Logout();
+            User.Logout();
             Login login = new Login();
             login.Show();
             this.Close();
@@ -72,7 +72,7 @@ namespace Restaurant_Application_CSharp_WPF
 
         private void btnNewOrder_Click(object sender, RoutedEventArgs e)
         {
-            NewOrder newOrder = new NewOrder(user);
+            NewOrder newOrder = new NewOrder(User);
             newOrder.Show();
         }
 
@@ -86,7 +86,7 @@ namespace Restaurant_Application_CSharp_WPF
                 int orderId = orderSelected.OrderNo;
                 int tableId = orderSelected.TableNo;
 
-                UpdateOrder updateOrder = new UpdateOrder(user, orderId, tableId);
+                UpdateOrder updateOrder = new UpdateOrder(User, orderId, tableId);
                 updateOrder.Show();
 
                 this.Hide();
