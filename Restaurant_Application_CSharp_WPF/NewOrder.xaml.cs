@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Restaurant_Application_CSharp_WPF.Service;
+using System.Data.Entity.Infrastructure;
 
 namespace Restaurant_Application_CSharp_WPF
 {
@@ -21,6 +22,7 @@ namespace Restaurant_Application_CSharp_WPF
     public partial class NewOrder : Window
     {
         public UserLoginState user { get; set; }
+        public int TableNo { get; set; }
         public NewOrder(UserLoginState user)
         {
             this.user = user;
@@ -33,6 +35,9 @@ namespace Restaurant_Application_CSharp_WPF
             dgTablesNO.ItemsSource = Services.GetAvailableTables();
 
             cbCategory.ItemsSource = Services.GetFoodCategory();
+
+            btnRemove.Visibility = Visibility.Hidden;
+            
 
         }
 
@@ -50,7 +55,7 @@ namespace Restaurant_Application_CSharp_WPF
         }
 
         bool isTableSelected = false;
-        int tableNo = 0;
+        
         private void btnConfirmTable_Click(object sender, RoutedEventArgs e)
         {
             dynamic table = dgTablesNO.SelectedItem;    // Annonymous data type
@@ -58,15 +63,13 @@ namespace Restaurant_Application_CSharp_WPF
             if(table != null)
             {
                 isTableSelected = true;
-                tableNo = table.TableNo;
-                //MessageBox.Show(table.TableNo.ToString());
-                string strTableSelection = $"Table No: {table.TableNo.ToString()}";
-                lblTableSelection.Content = strTableSelection;
+                this.TableNo = table.TableNo;
+                lblTableSelection.Content = $"Table No: {this.TableNo.ToString()}";
                 lblTableSelection.Visibility = Visibility.Visible;
             }
             else
             {
-                MessageBox.Show("Please Select Table Before Proceed", "Table Not Selected");
+                MessageBox.Show("Please Select Table Before Proceed!", "Table Not Selected");
             }
             
         }
@@ -78,6 +81,11 @@ namespace Restaurant_Application_CSharp_WPF
 
             if (cbQuantity.SelectedIndex > -1)   // comboBox selected
             {
+                // Check if Tabel Selected
+                if(isTableSelected == false)
+                {
+                    MessageBox.Show("Please Select Table Before Proceed!", "Table Not Selected");
+                }
                 prodQuantity = int.Parse(cbQuantity.Text);  // Product Quatity in (int32)
                 //MessageBox.Show(prodQuantity.GetType().ToString());
             }
@@ -105,19 +113,36 @@ namespace Restaurant_Application_CSharp_WPF
                 MessageBox.Show("Please Select Product Before Proceed!", "Product Selection Required");
             }
 
-
+            if (lvProductAdded.Items.Count < 1)
+            {
+                btnRemove.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                btnRemove.Visibility = Visibility.Visible;
+            }
         }
 
         private void btnRemove_Click(object sender, RoutedEventArgs e)
-        {           
+        {
+            if (lvProductAdded.Items.Count < 1)
+            {
+                MessageBox.Show("Please Add Item To Cart","Order Card Is Empty!");
+                btnRemove.Visibility = Visibility.Hidden;
+            }
+            else if(lvProductAdded.SelectedIndex < 0)
+            {
+                MessageBox.Show("Please Select Product To Be Deleted!", "Product Selection Required");
+            }
+            else
+            {
+                NewProduct newProduct = new NewProduct();
+                newProduct = lvProductAdded.SelectedItem as NewProduct;
 
-            NewProduct newProduct = new NewProduct();
-            newProduct = lvProductAdded.SelectedItem as NewProduct;
-
-            theNewOrder.Remove(newProduct);
-            RefreshProductList();
-            //MessageBox.Show(newProduct.ProdName.ToString());
-
+                theNewOrder.Remove(newProduct);
+                RefreshProductList();
+                //MessageBox.Show(newProduct.ProdName.ToString());
+            }
         }
 
         // Refresh Product list Method
@@ -127,7 +152,47 @@ namespace Restaurant_Application_CSharp_WPF
             lvProductAdded.ItemsSource = theNewOrder;
         }
 
-        
+        private void btnSubmit_Click(object sender, RoutedEventArgs e)
+        {
+            //MessageBox.Show($"empid: {this.user.empId}, tableid: {this.TableNo}, Creation time:{DateTime.Now:MMMM-dd-yyyy H:mm:ss}");
+
+            // Insert to OrderHeader
+            //OrderHeader orderHeader = new OrderHeader()
+            //{
+            //    EmpID = this.user.empId,
+            //    TableID = this.TableNo,
+            //    CreationTime = DateTime.Now,
+            //    TotalPrice = null,
+            //    IsServing = true,
+            //    DiningIn = true
+            //};
+
+            //using (RestaurantEntities restaurantEntities = new RestaurantEntities())
+            //{
+            //    restaurantEntities.OrderHeaders.Add(orderHeader);
+            //    try
+            //    {
+            //        restaurantEntities.SaveChanges();
+            //    }
+            //    catch(DbUpdateException ex)
+            //    {
+            //        MessageBox.Show(ex.Message);
+            //    }
+            //}
+
+            //MessageBox.Show(orderHeader.OrderID.ToString());
+            //MessageBox.Show(theNewOrder.Count().ToString());
+
+            for(int i = 0; i < theNewOrder.Count(); i++)
+            {
+                //MessageBox.Show($"{ theNewOrder[i].ProdId}, Quantity: {theNewOrder[i].ProdQuantity}");
+                using( RestaurantEntities restaurantEntities = new RestaurantEntities())
+                {
+                   
+                }
+            }
+
+        }
     }
 
     public class NewProduct

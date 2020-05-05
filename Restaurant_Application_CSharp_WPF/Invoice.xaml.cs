@@ -44,6 +44,7 @@ namespace Restaurant_Application_CSharp_WPF
             txblkTotal.Text = $"${totalPrice}";
             txblkSubTotal.Text = $"${subPrice}";
             txblkEmpName.Text = $"{this.User.FullName}";
+            txblkTimePrinted.Text = $"Printed On: {DateTime.Now:MMMM-dd-yyyy H:mm:ss}";
 
             dgOrderDetail.ItemsSource = Services.GetOrderDetailByOrderId(orderId);
 

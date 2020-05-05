@@ -20,6 +20,7 @@
                     <Image Source=".\Images\printer.png" Width="40"/>
                 </Button.Content>
             </Button>
+            <TextBlock x:Name="txblkTimePrinted" Text="Time Printed:" VerticalAlignment="Bottom" FontSize="10" Margin="20" FontWeight="Light"/>
             <Grid x:Name="print">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="120"/>
