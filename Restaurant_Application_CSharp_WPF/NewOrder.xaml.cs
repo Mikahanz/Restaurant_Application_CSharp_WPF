@@ -16,9 +16,7 @@ using System.Data.Entity.Infrastructure;
 
 namespace Restaurant_Application_CSharp_WPF
 {
-    /// <summary>
-    /// Interaction logic for NewOrder.xaml
-    /// </summary>
+    
     public partial class NewOrder : Window
     {
         public UserLoginState user { get; set; }
@@ -43,12 +41,15 @@ namespace Restaurant_Application_CSharp_WPF
 
         private void btnCloseNO_Click(object sender, RoutedEventArgs e)
         {
+            WaiterPage waiterPage = new WaiterPage(user);
+            waiterPage.Show();
+
             this.Close();
         }
 
         private void cbCategory_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            //MessageBox.Show(cbCategory.SelectedItem.ToString());
+            
             string prodCategory = cbCategory.SelectedItem.ToString();   // food category from combobox
 
             dgProductsNO.ItemsSource = Services.GetProductByCategory(prodCategory);     // Populate Product Table
@@ -87,7 +88,7 @@ namespace Restaurant_Application_CSharp_WPF
                     MessageBox.Show("Please Select Table Before Proceed!", "Table Not Selected");
                 }
                 prodQuantity = int.Parse(cbQuantity.Text);  // Product Quatity in (int32)
-                //MessageBox.Show(prodQuantity.GetType().ToString());
+                
             }
             else
             {
@@ -105,8 +106,6 @@ namespace Restaurant_Application_CSharp_WPF
                 theNewOrder.Add(new NewProduct() { ProdId = productId, ProdName = productName, ProdQuantity = prodQuantity });
                 RefreshProductList();
 
-
-                //MessageBox.Show(product.ProductId.ToString());
             }
             else
             {
@@ -154,7 +153,6 @@ namespace Restaurant_Application_CSharp_WPF
 
         private void btnSubmit_Click(object sender, RoutedEventArgs e)
         {
-            //MessageBox.Show($"empid: {this.user.empId}, tableid: {this.TableNo}, Creation time:{DateTime.Now:MMMM-dd-yyyy H:mm:ss}");
 
             // Check if list is empty
             if (lvProductAdded.Items.Count < 1)
@@ -187,13 +185,9 @@ namespace Restaurant_Application_CSharp_WPF
                     }
                 }
 
-                //MessageBox.Show(orderHeader.OrderID.ToString());
-                //MessageBox.Show(theNewOrder.Count().ToString());
-
                 // Insert to OrderDetail
                 for (int i = 0; i < theNewOrder.Count(); i++)
                 {
-                    //MessageBox.Show($"{ theNewOrder[i].ProdId}, Quantity: {theNewOrder[i].ProdQuantity}");
                     using (RestaurantEntities restaurantEntities = new RestaurantEntities())
                     {
                         OrderDetail orderDetail = new OrderDetail()
@@ -217,7 +211,7 @@ namespace Restaurant_Application_CSharp_WPF
                     }
                 }
 
-                // Update RestaurantTable Availability
+                // Update RestaurantTable Availability to false
                 using(RestaurantEntities restaurantEntities = new RestaurantEntities())
                 {
                     RestaurantTable restaurantTable = new RestaurantTable();
@@ -239,8 +233,10 @@ namespace Restaurant_Application_CSharp_WPF
                 MessageBox.Show($"New Order {orderHeader.OrderID} Has Been Successfully Created!", "New Order Created Successfully");
 
                 // Open waiter page
-                WaiterPage waiterPage = new WaiterPage(user);
-                waiterPage.Show();
+                //WaiterPage waiterPage = new WaiterPage(user);
+                //waiterPage.Show();
+
+                this.user.refreshingPage($"New Order {orderHeader.OrderID} Has Been Created");
 
                 // close this page
                 this.Close();

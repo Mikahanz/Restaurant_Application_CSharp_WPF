@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Restaurant_Application_CSharp_WPF.Service;
+using System.Data.Entity.Infrastructure;
 
 namespace Restaurant_Application_CSharp_WPF
 {
@@ -63,13 +64,66 @@ namespace Restaurant_Application_CSharp_WPF
             this.Close();
         }
 
+        // BUTTON CHECKOUT
         private void btnCheckOut_Click(object sender, RoutedEventArgs e)
         {
             var result = MessageBox.Show("Are you sure you want to Checkout? Checkout will close the order!", "Check Out", MessageBoxButton.YesNo);
             if (result == MessageBoxResult.Yes)
             {
+                var wantPrint = MessageBox.Show("Would You Like To Print Receipt? Yes, Will Close The Order And Print Receipt! No, Will Only Close The Order", "Print Receipt", MessageBoxButton.YesNo);
+                if(wantPrint == MessageBoxResult.Yes)
+                {
+                    Invoice invoice = new Invoice(this.User, this.TotalPrice, this.SubPrice, this.TableId, this.OrderId, this.Time);
+                    invoice.Show();
+                }
 
-                //MessageBox.Show("YESSSS");
+                // Check Out
+
+                    // Change IsServing Status To False and Enter TotalPrice 
+                using(RestaurantEntities restaurantEntities = new RestaurantEntities())
+                {
+                    OrderHeader orderHeader = new OrderHeader();
+                    orderHeader = restaurantEntities.OrderHeaders.Find(this.OrderId);
+
+                    orderHeader.IsServing = false;  //IsServing Status To False
+                    orderHeader.TotalPrice = this.SubPrice; //Enter TotalPrice (Total bofore taxes)
+
+                    try
+                    {
+                        restaurantEntities.SaveChanges();
+                    }
+                    catch(DbUpdateException ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+                }
+
+                // Change RestaurantTable Availability to True
+                using (RestaurantEntities restaurantEntities = new RestaurantEntities())
+                {
+                    RestaurantTable restaurantTable = new RestaurantTable();
+                    restaurantTable = restaurantEntities.RestaurantTables.Find(this.TableId);
+
+                    restaurantTable.Availability = true;
+
+                    try
+                    {
+                        restaurantEntities.SaveChanges();
+                    }
+                    catch (DbUpdateException ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+                }
+
+                // Message 
+                MessageBox.Show($"Order No: {this.OrderId} Has Now Been Closed, and Table No: {this.TableId} Is Now Available", "Order Closed");
+
+                // Refresh WaiterPage Orders Table and Table Availability
+                this.User.refreshingPage($"Order No: {this.OrderId} Has Now Been Closed, and Table No: {this.TableId} Is Now Available");
+                
+                // Close This window and open
+                this.Close();
             }
             else
             {
@@ -79,11 +133,8 @@ namespace Restaurant_Application_CSharp_WPF
 
         private void btnPrint_Click(object sender, RoutedEventArgs e)
         {
-
-
             Invoice invoice = new Invoice(this.User, this.TotalPrice, this.SubPrice, this.TableId, this.OrderId, this.Time);
             invoice.Show();
-
         }
     }
 }

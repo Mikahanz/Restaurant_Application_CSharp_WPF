@@ -16,9 +16,7 @@ using Restaurant_Application_CSharp_WPF.Service;
 
 namespace Restaurant_Application_CSharp_WPF
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
+   
     public partial class Login : Window
     {
         public Login()

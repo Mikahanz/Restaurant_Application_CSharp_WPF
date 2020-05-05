@@ -40,9 +40,6 @@ namespace Restaurant_Application_CSharp_WPF
         private void btnCloseUO_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
-            WaiterPage waiterPage = new WaiterPage(user);
-            waiterPage.Show();
-
         }
 
         private void cbCategoryUpd_SelectionChanged(object sender, SelectionChangedEventArgs e)

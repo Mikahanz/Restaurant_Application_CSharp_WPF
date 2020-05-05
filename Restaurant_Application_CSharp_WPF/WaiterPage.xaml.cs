@@ -15,9 +15,7 @@ using Restaurant_Application_CSharp_WPF.Service;
 
 namespace Restaurant_Application_CSharp_WPF
 {
-    /// <summary>
-    /// Interaction logic for WaiterPage.xaml
-    /// </summary>
+   
     public partial class WaiterPage : Window
     {
         public UserLoginState User { get; set; }
@@ -27,8 +25,6 @@ namespace Restaurant_Application_CSharp_WPF
 
             InitializeComponent();
             
-            //MessageBox.Show($"empid: {user.empId}, name: {user.FullName}, userTypE: {user.EmployeeType}, isuserlogin: {user.IsLoggedIn}");
-
             lblEmpName.Content = $"Employee Name: { user.FullName}";
             lblEmpNo.Content = $"Employee No: {user.empId}";
             tbPageTitle.Text = user.EmployeeType;
@@ -39,7 +35,22 @@ namespace Restaurant_Application_CSharp_WPF
             // Populata restaurant table
             dgTables.ItemsSource = Services.GetrestaurantTables();
 
+            User.RefreshPageEvent += User_RefreshPageEvent;
+        }
 
+        private void User_RefreshPageEvent(object sender, string str)
+        {
+            // refresh orders table
+            dgOrders.ItemsSource = null; ;
+            dgOrders.ItemsSource = Services.GetOrderDetails(this.User.empId);
+
+            // refresh Rest Table table
+            dgTables.ItemsSource = null;
+            dgTables.ItemsSource = Services.GetrestaurantTables();
+
+            // show notification
+            lblNotification.Content = str;
+            lblNotification.Visibility = Visibility.Visible;
         }
 
         private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -54,12 +65,9 @@ namespace Restaurant_Application_CSharp_WPF
             int tableId = od.TableNo;
             DateTime time = od.CreationTime;
 
-            //MessageBox.Show($"orderid: {orderId}, table no: {tableId}");
-
             OrderInfo ord = new OrderInfo(User,orderId, tableId, time);
 
             ord.Show();
-            
         }
 
         private void btnCloseWP_Click(object sender, RoutedEventArgs e)
@@ -74,8 +82,6 @@ namespace Restaurant_Application_CSharp_WPF
         {
             NewOrder newOrder = new NewOrder(User);
             newOrder.Show();
-
-            this.Hide();
         }
 
         private void btnUpdate_Click(object sender, RoutedEventArgs e)
@@ -90,15 +96,16 @@ namespace Restaurant_Application_CSharp_WPF
 
                 UpdateOrder updateOrder = new UpdateOrder(User, orderId, tableId);
                 updateOrder.Show();
-
-                this.Hide();
             }
             else
             {
                 MessageBox.Show("Please Select Order Detail Before Proceed!", "Order Selection Required");
             }
+        }
 
-            
+        private void lblNotification_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            lblNotification.Visibility = Visibility.Collapsed;
         }
     }
 }
