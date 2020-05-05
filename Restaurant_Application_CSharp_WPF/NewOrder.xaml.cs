@@ -188,7 +188,7 @@ namespace Restaurant_Application_CSharp_WPF
                 //MessageBox.Show($"{ theNewOrder[i].ProdId}, Quantity: {theNewOrder[i].ProdQuantity}");
                 using( RestaurantEntities restaurantEntities = new RestaurantEntities())
                 {
-                   
+                   //
                 }
             }
 
