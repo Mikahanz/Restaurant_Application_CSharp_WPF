@@ -236,7 +236,7 @@ namespace Restaurant_Application_CSharp_WPF
                 //WaiterPage waiterPage = new WaiterPage(user);
                 //waiterPage.Show();
 
-                this.user.refreshingPage($"New Order {orderHeader.OrderID} Has Been Created");
+                this.user.refreshingWaiterPage($"New Order {orderHeader.OrderID} Has Been Created");
 
                 // close this page
                 this.Close();

@@ -33,7 +33,7 @@ namespace Restaurant_Application_CSharp_WPF
             InitializeComponent();
 
             lblEmpNameUpd.Content = $"Employee Name: {user.FullName}";
-            lblEmpNo.Content =      $"Employee No  : {user.empId}";
+            lblEmpNo.Content = $"Employee No  : {user.empId}";
             lblOrderNo.Content = $"Order No  : {orderId}";
             lblTableNo.Content = $"Table No  : {tableId}";
 
@@ -60,15 +60,15 @@ namespace Restaurant_Application_CSharp_WPF
             int prodQuantity = int.Parse(cbQuantityUpd.Text);
             //MessageBox.Show($"{this.OrderId},{product.ProductId},{product.ProductName},{prodQuantity}");
 
-            MessageBoxResult result = MessageBox.Show($"Do You Sure You Want To Add Item no {product.ProductId}","Add New Item To Existing Cart", MessageBoxButton.YesNo);
-            if(result == MessageBoxResult.Yes)
+            MessageBoxResult result = MessageBox.Show($"Do You Sure You Want To Add Item no {product.ProductNo} ({product.ProductName})", "Add New Item To Existing Cart", MessageBoxButton.YesNo);
+            if (result == MessageBoxResult.Yes)
             {
-                using(RestaurantEntities restaurantEntities = new RestaurantEntities())
+                using (RestaurantEntities restaurantEntities = new RestaurantEntities())
                 {
                     OrderDetail orderDetail = new OrderDetail()
                     {
                         OrderID = this.OrderId,
-                        ProductID = product.ProductId,
+                        ProductID = product.ProductNo,
                         Quantity = prodQuantity,
                         IsReady = false
                     };
@@ -79,20 +79,22 @@ namespace Restaurant_Application_CSharp_WPF
                     {
                         restaurantEntities.SaveChanges();
                     }
-                    catch(DbUpdateException ex)
+                    catch (DbUpdateException ex)
                     {
                         MessageBox.Show(ex.Message);
                     }
                 }
 
-                RefreshDGOrderDetail();
+                RefreshDGOrderDetail(); // refreshing the orderdetail table on UpdateOrder Page
+                this.user.refreshingWaiterPage($"Item No {product.ProductNo} ({product.ProductName}) Has Been Added To Order No {this.OrderId}");
+
             }
         }
 
         public void RefreshDGOrderDetail()
         {
             dgOrderDetailUpd.ItemsSource = null;
-            dgOrderDetailUpd.ItemsSource = Services.GetOrderDetailByOrderId(this.OrderId); 
+            dgOrderDetailUpd.ItemsSource = Services.GetOrderDetailByOrderId(this.OrderId);
         }
 
         private void btnRemoveUpd_Click(object sender, RoutedEventArgs e)
@@ -102,7 +104,7 @@ namespace Restaurant_Application_CSharp_WPF
             MessageBoxResult result = MessageBox.Show($"Are You Sure You Want To Remove Item No {product.ProductNo} {product.ProductName}?", "Remove Item From Existing Cart", MessageBoxButton.YesNo);
             if (result == MessageBoxResult.Yes)
             {
-                using(RestaurantEntities restaurantEntities = new RestaurantEntities())
+                using (RestaurantEntities restaurantEntities = new RestaurantEntities())
                 {
                     OrderDetail orderDetail = new OrderDetail();
                     orderDetail = restaurantEntities.OrderDetails.Find(product.OrderDetailNo);
@@ -114,6 +116,47 @@ namespace Restaurant_Application_CSharp_WPF
                         restaurantEntities.SaveChanges();
                         MessageBox.Show($"Item: {product.ProductNo} {product.ProductName}, has been removed from order No: {this.OrderId}");
                     }
+                    catch (DbUpdateException ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+                }
+
+                RefreshDGOrderDetail();
+                this.user.refreshingWaiterPage($"Item No {product.ProductNo} {product.ProductName} Has Been Removed From Order No {this.OrderId}");
+            }
+
+            //MessageBox.Show($"{product.OrderDetailNo}");
+        }
+
+        // Update
+        //Employee employee = new Employee();
+        //employee = restaurantEntities.Employees.Find(106);
+
+        //employee.FullName = "Nolan Hanzel";           
+        //restaurantEntities.SaveChanges();
+        private void btnEditUpd_Click(object sender, RoutedEventArgs e)
+        {
+            dynamic productMenu = dgProductsUpd.SelectedItem;
+            dynamic productOrder = dgOrderDetailUpd.SelectedItem;
+            int prodQuantity = int.Parse(cbQuantityUpd.Text);
+
+            MessageBoxResult result = MessageBox.Show($"Are You Sure You Want To Change Item {productOrder.ProductNo} ({productOrder.ProductName}) with Item {productMenu.ProductNo} ({productMenu.ProductName})?", 
+                "Change Order Item From Existing Cart", MessageBoxButton.YesNo);
+            if (result == MessageBoxResult.Yes)
+            {
+                using (RestaurantEntities restaurantEntities = new RestaurantEntities())
+                {
+                    OrderDetail orderDetail = new OrderDetail();
+                    orderDetail = restaurantEntities.OrderDetails.Find(productOrder.OrderDetailNo);
+
+                    orderDetail.ProductID = productMenu.ProductNo;
+                    orderDetail.Quantity = prodQuantity;
+
+                    try
+                    {
+                        restaurantEntities.SaveChanges();
+                    }
                     catch(DbUpdateException ex)
                     {
                         MessageBox.Show(ex.Message);
@@ -121,9 +164,11 @@ namespace Restaurant_Application_CSharp_WPF
                 }
 
                 RefreshDGOrderDetail();
+                this.user.refreshingWaiterPage($"Item {productOrder.ProductNo} ({productOrder.ProductName}) Has Been Change with Item {productMenu.ProductNo} ({productMenu.ProductName})");
             }
 
-            //MessageBox.Show($"{product.OrderDetailNo}");
+                
+
         }
     }
 }

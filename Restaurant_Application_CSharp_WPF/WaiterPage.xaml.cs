@@ -35,10 +35,10 @@ namespace Restaurant_Application_CSharp_WPF
             // Populata restaurant table
             dgTables.ItemsSource = Services.GetrestaurantTables();
 
-            User.RefreshPageEvent += User_RefreshPageEvent;
+            User.RefreshWaiterPageEvent += User_RefreshWaiterPageEvent;
         }
 
-        private void User_RefreshPageEvent(object sender, string str)
+        private void User_RefreshWaiterPageEvent(object sender, string str)
         {
             // refresh orders table
             dgOrders.ItemsSource = null; ;

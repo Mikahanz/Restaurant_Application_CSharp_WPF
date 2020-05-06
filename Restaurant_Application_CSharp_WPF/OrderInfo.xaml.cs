@@ -56,7 +56,17 @@ namespace Restaurant_Application_CSharp_WPF
 
             lblTimeText.Content = this.Time;
 
+            User.RefreshOrderInfoPageEvent += User_RefreshOrderInfoPageEvent;
+        }
 
+        private void User_RefreshOrderInfoPageEvent(object sender, string str)
+        {
+            dgOrderDetail.ItemsSource = null;
+            dgOrderDetail.ItemsSource = Services.GetOrderDetailByOrderId(this.OrderId);
+
+            // show notification
+            lblNotification.Content = str;
+            lblNotification.Visibility = Visibility.Visible;
         }
 
         private void btnCloseOD_Click(object sender, RoutedEventArgs e)
@@ -120,7 +130,7 @@ namespace Restaurant_Application_CSharp_WPF
                 MessageBox.Show($"Order No: {this.OrderId} Has Now Been Closed, and Table No: {this.TableId} Is Now Available", "Order Closed");
 
                 // Refresh WaiterPage Orders Table and Table Availability
-                this.User.refreshingPage($"Order No: {this.OrderId} Has Now Been Closed, and Table No: {this.TableId} Is Now Available");
+                this.User.refreshingWaiterPage($"Order No: {this.OrderId} Has Now Been Closed, and Table No: {this.TableId} Is Now Available");
                 
                 // Close This window and open
                 this.Close();
@@ -135,6 +145,11 @@ namespace Restaurant_Application_CSharp_WPF
         {
             Invoice invoice = new Invoice(this.User, this.TotalPrice, this.SubPrice, this.TableId, this.OrderId, this.Time);
             invoice.Show();
+        }
+
+        private void lblNotification_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            lblNotification.Visibility = Visibility.Collapsed;
         }
     }
 }

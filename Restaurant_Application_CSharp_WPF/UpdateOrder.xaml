@@ -59,7 +59,7 @@
                           CanUserResizeRows="False"
                           ScrollViewer.CanContentScroll="True">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="No" Binding="{Binding ProductId}" Width="1*"></DataGridTextColumn>
+                    <DataGridTextColumn Header="No" Binding="{Binding ProductNo}" Width="1*"></DataGridTextColumn>
                     <DataGridTextColumn Header="Product Name" Binding="{Binding ProductName}" Width="4*"></DataGridTextColumn>
                     <DataGridTextColumn Header="Category" Binding="{Binding ProductType}" Width="2*"></DataGridTextColumn>
                 </DataGrid.Columns>
@@ -95,6 +95,7 @@
                     IsReadOnly="True" 
                     CanUserAddRows="False"
                     SelectionMode="Single"
+                    SelectedIndex="0"
                     CanUserResizeColumns="False"
                     CanUserResizeRows="False"
                     ScrollViewer.CanContentScroll="True">
@@ -123,7 +124,7 @@
                     </Style>
                 </Button.Resources>
             </Button>
-            <Button x:Name="btnEditUpd" Grid.Column="2" HorizontalAlignment="Right"  VerticalAlignment="Bottom" Height="30" Width="60" Content="Edit Order" Background="#FF1492B8" Margin="0,0,40,10">
+            <Button x:Name="btnEditUpd" Click="btnEditUpd_Click" Grid.Column="2" HorizontalAlignment="Right"  VerticalAlignment="Bottom" Height="30" Width="60" Content="Edit Order" Background="#FF1492B8" Margin="0,0,40,10">
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="10"/>

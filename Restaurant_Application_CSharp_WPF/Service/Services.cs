@@ -144,7 +144,7 @@ namespace Restaurant_Application_CSharp_WPF.Service
                 var productsByCategory = (from p in restaurantEntities.Products
                                           select new
                                           {
-                                            ProductId = p.ProductID,
+                                            ProductNo = p.ProductID,
                                             ProductName = p.ProductName,
                                             ProductType = p.ProductType,
                                             Price = p.Price,

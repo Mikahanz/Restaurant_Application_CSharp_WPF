@@ -28,7 +28,14 @@
                 </Style>
             </Button.Resources>
         </Button>
-        <TextBlock x:Name="tbPageTitleOD" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="30" Foreground="Black">Order Detail</TextBlock>
+        <TextBlock x:Name="tbPageTitleOD" Grid.Row="0" Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="30" Foreground="Black">Order Detail</TextBlock>
+        <Label x:Name="lblNotification" MouseDoubleClick="lblNotification_MouseDoubleClick"
+               Grid.Row="0" Grid.Column="1" 
+               VerticalAlignment="Bottom" 
+               HorizontalAlignment="Center"  
+               FontSize="15" 
+               Foreground="Blue" 
+               Visibility="Collapsed" Panel.ZIndex="10">notification</Label>
         <TextBlock Grid.Row="0" Grid.Column="1" VerticalAlignment="TOp" HorizontalAlignment="Left" FontSize="15" Foreground="Black" Margin="10,0,0,0">
             <Label x:Name="lblOrderNo" Content="Order No:"></Label>
             <Label x:Name="lblOrderNoText" Content="ON"></Label>
