@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Restaurant_Application_CSharp_WPF.Service;
+using Restaurant_Application_CSharp_WPF.Model;
 using System.Data.Entity.Infrastructure;
 
 namespace Restaurant_Application_CSharp_WPF

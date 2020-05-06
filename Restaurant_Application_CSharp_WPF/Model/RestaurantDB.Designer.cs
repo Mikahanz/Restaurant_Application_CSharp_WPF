@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Users\MichaelH\source\repos\Restaurant_Application_CSharp_WPF\Restaurant_Application_CSharp_WPF\RestaurantDB.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\MichaelH\source\repos\Restaurant_Application_CSharp_WPF\Restaurant_Application_CSharp_WPF\Model\RestaurantDB.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

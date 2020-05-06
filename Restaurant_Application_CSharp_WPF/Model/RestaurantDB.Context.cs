@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Restaurant_Application_CSharp_WPF
+namespace Restaurant_Application_CSharp_WPF.Model
 {
     using System;
     using System.Data.Entity;

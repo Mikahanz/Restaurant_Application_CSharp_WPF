@@ -7,17 +7,20 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Restaurant_Application_CSharp_WPF
+namespace Restaurant_Application_CSharp_WPF.Model
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class sysdiagram
+    public partial class OrderDetail
     {
-        public string name { get; set; }
-        public int principal_id { get; set; }
-        public int diagram_id { get; set; }
-        public Nullable<int> version { get; set; }
-        public byte[] definition { get; set; }
+        public int OrderDetailID { get; set; }
+        public int OrderID { get; set; }
+        public int ProductID { get; set; }
+        public int Quantity { get; set; }
+        public bool IsReady { get; set; }
+    
+        public virtual OrderHeader OrderHeader { get; set; }
+        public virtual Product Product { get; set; }
     }
 }

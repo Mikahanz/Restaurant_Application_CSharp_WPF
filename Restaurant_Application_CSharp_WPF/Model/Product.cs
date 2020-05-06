@@ -7,26 +7,26 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Restaurant_Application_CSharp_WPF
+namespace Restaurant_Application_CSharp_WPF.Model
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Employee
+    public partial class Product
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Employee()
+        public Product()
         {
-            this.OrderHeaders = new HashSet<OrderHeader>();
+            this.OrderDetails = new HashSet<OrderDetail>();
         }
     
-        public int EmpID { get; set; }
-        public string FullName { get; set; }
-        public string UserName { get; set; }
-        public string Password { get; set; }
-        public string EmployeType { get; set; }
+        public int ProductID { get; set; }
+        public string ProductName { get; set; }
+        public string ProductType { get; set; }
+        public decimal Price { get; set; }
+        public bool Availability { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<OrderHeader> OrderHeaders { get; set; }
+        public virtual ICollection<OrderDetail> OrderDetails { get; set; }
     }
 }

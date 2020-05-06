@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Restaurant_Application_CSharp_WPF.Service;
+using Restaurant_Application_CSharp_WPF.Model;
 
 namespace Restaurant_Application_CSharp_WPF.Service
 {

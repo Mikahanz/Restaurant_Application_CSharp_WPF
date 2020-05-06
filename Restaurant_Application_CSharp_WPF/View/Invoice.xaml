@@ -12,12 +12,12 @@
             <Button x:Name="btnCloseInvoice" Click="btnCloseInvoice_Click" HorizontalAlignment="Right"  VerticalAlignment="Top">
                 <Button.Content>
                     <!--<TextBlock Text="Close"/>-->
-                    <Image Source=".\Images\closeicon.png" Width="40"/>
+                    <Image Source="..\Images\closeicon.png" Width="40"/>
                 </Button.Content>
             </Button>
             <Button x:Name="btnPrintInvoice" Click="btnPrintInvoice_Click" HorizontalAlignment="Right" Margin="10" VerticalAlignment="Bottom" Background="Transparent">
                 <Button.Content>
-                    <Image Source=".\Images\printer.png" Width="40"/>
+                    <Image Source="..\Images\printer.png" Width="40"/>
                 </Button.Content>
             </Button>
             <TextBlock x:Name="txblkTimePrinted" Text="Time Printed:" VerticalAlignment="Bottom" FontSize="10" Margin="20" FontWeight="Light"/>
@@ -29,7 +29,7 @@
                 </Grid.RowDefinitions>
 
                 <StackPanel Orientation="Horizontal" Margin="30" Grid.Row="0">
-                    <Image Source=".\Images\restaurantlogo.png" Width="80" Height="80" VerticalAlignment="Center"/>
+                    <Image Source="..\Images\restaurantlogo.png" Width="80" Height="80" VerticalAlignment="Center"/>
                     <TextBlock Text="Hanzel Restaurant" VerticalAlignment="Center" Margin="10" FontSize="25" FontWeight="Bold" Foreground="#FF1492B8"/>
                     
                 </StackPanel>

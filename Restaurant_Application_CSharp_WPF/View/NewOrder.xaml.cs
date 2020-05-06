@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Restaurant_Application_CSharp_WPF.Service;
 using System.Data.Entity.Infrastructure;
+using Restaurant_Application_CSharp_WPF.Model;
 
 namespace Restaurant_Application_CSharp_WPF
 {
@@ -82,9 +83,7 @@ namespace Restaurant_Application_CSharp_WPF
 
             if (cbQuantity.SelectedIndex > -1)   // comboBox selected
             {
-                
                 prodQuantity = int.Parse(cbQuantity.Text);  // Product Quatity in (int32)
-                
             }
             else
             {
@@ -92,8 +91,6 @@ namespace Restaurant_Application_CSharp_WPF
             }
 
             dynamic product = dgProductsNO.SelectedItem;
-
-            
 
             if(product != null)
             {
