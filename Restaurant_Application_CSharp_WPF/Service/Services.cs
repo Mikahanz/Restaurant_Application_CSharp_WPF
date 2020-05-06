@@ -74,6 +74,7 @@ namespace Restaurant_Application_CSharp_WPF.Service
                                             on od.OrderID equals oh.OrderID
                                             select new
                                             {
+                                                OrderDetailNo = od.OrderDetailID,
                                                 OrderNo = od.OrderID,
                                                 TableNo = oh.TableID,
                                                 ProductNo = p.ProductID,

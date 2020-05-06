@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,9 +22,13 @@ namespace Restaurant_Application_CSharp_WPF
     public partial class UpdateOrder : Window
     {
         public UserLoginState user { get; set; }
+        public int OrderId { get; set; }
+        public int TableId { get; set; }
         public UpdateOrder(UserLoginState user, int orderId, int tableId)
         {
             this.user = user;
+            this.OrderId = orderId;
+            this.TableId = tableId;
 
             InitializeComponent();
 
@@ -47,6 +52,78 @@ namespace Restaurant_Application_CSharp_WPF
             string prodCategory = cbCategoryUpd.SelectedItem.ToString();   // food category from combobox
 
             dgProductsUpd.ItemsSource = Services.GetProductByCategory(prodCategory);     // Populate Product Table
+        }
+
+        private void btnAddUpd_Click(object sender, RoutedEventArgs e)
+        {
+            dynamic product = dgProductsUpd.SelectedItem;
+            int prodQuantity = int.Parse(cbQuantityUpd.Text);
+            //MessageBox.Show($"{this.OrderId},{product.ProductId},{product.ProductName},{prodQuantity}");
+
+            MessageBoxResult result = MessageBox.Show($"Do You Sure You Want To Add Item no {product.ProductId}","Add New Item To Existing Cart", MessageBoxButton.YesNo);
+            if(result == MessageBoxResult.Yes)
+            {
+                using(RestaurantEntities restaurantEntities = new RestaurantEntities())
+                {
+                    OrderDetail orderDetail = new OrderDetail()
+                    {
+                        OrderID = this.OrderId,
+                        ProductID = product.ProductId,
+                        Quantity = prodQuantity,
+                        IsReady = false
+                    };
+
+                    restaurantEntities.OrderDetails.Add(orderDetail);
+
+                    try
+                    {
+                        restaurantEntities.SaveChanges();
+                    }
+                    catch(DbUpdateException ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+                }
+
+                RefreshDGOrderDetail();
+            }
+        }
+
+        public void RefreshDGOrderDetail()
+        {
+            dgOrderDetailUpd.ItemsSource = null;
+            dgOrderDetailUpd.ItemsSource = Services.GetOrderDetailByOrderId(this.OrderId); 
+        }
+
+        private void btnRemoveUpd_Click(object sender, RoutedEventArgs e)
+        {
+            dynamic product = dgOrderDetailUpd.SelectedItem;
+
+            MessageBoxResult result = MessageBox.Show($"Are You Sure You Want To Remove Item No {product.ProductNo} {product.ProductName}?", "Remove Item From Existing Cart", MessageBoxButton.YesNo);
+            if (result == MessageBoxResult.Yes)
+            {
+                using(RestaurantEntities restaurantEntities = new RestaurantEntities())
+                {
+                    OrderDetail orderDetail = new OrderDetail();
+                    orderDetail = restaurantEntities.OrderDetails.Find(product.OrderDetailNo);
+
+                    restaurantEntities.OrderDetails.Remove(orderDetail);
+
+                    try
+                    {
+                        restaurantEntities.SaveChanges();
+                        MessageBox.Show($"Item: {product.ProductNo} {product.ProductName}, has been removed from order No: {this.OrderId}");
+                    }
+                    catch(DbUpdateException ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+                }
+
+                RefreshDGOrderDetail();
+            }
+
+            //MessageBox.Show($"{product.OrderDetailNo}");
         }
     }
 }
