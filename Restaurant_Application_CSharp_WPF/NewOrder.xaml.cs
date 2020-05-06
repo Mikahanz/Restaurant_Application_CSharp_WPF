@@ -82,11 +82,7 @@ namespace Restaurant_Application_CSharp_WPF
 
             if (cbQuantity.SelectedIndex > -1)   // comboBox selected
             {
-                // Check if Tabel Selected
-                if(isTableSelected == false)
-                {
-                    MessageBox.Show("Please Select Table Before Proceed!", "Table Not Selected");
-                }
+                
                 prodQuantity = int.Parse(cbQuantity.Text);  // Product Quatity in (int32)
                 
             }
@@ -101,10 +97,18 @@ namespace Restaurant_Application_CSharp_WPF
 
             if(product != null)
             {
-                string productName = product.ProductName;
-                int productId = product.ProductId;
-                theNewOrder.Add(new NewProduct() { ProdId = productId, ProdName = productName, ProdQuantity = prodQuantity });
-                RefreshProductList();
+                // Check if Tabel Selected
+                if (isTableSelected == false)
+                {
+                    MessageBox.Show("Please Select Table No Before Proceed!", "Table Not Selected");
+                }
+                else
+                {
+                    string productName = product.ProductName;
+                    int productId = product.ProductNo;
+                    theNewOrder.Add(new NewProduct() { ProdId = productId, ProdName = productName, ProdQuantity = prodQuantity });
+                    RefreshProductList();
+                }
 
             }
             else
