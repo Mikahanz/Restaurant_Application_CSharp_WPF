@@ -30,7 +30,7 @@ namespace Restaurant_Application_CSharp_WPF
             tbPageTitle.Text = user.EmployeeType;
 
             // populate order table
-            dgOrders.ItemsSource = Services.GetOrderDetails(user.empId);
+            dgOrders.ItemsSource = Services.GetOrderDetailsActive(user.empId);
 
             // Populata restaurant table
             dgTables.ItemsSource = Services.GetrestaurantTables();
@@ -42,7 +42,7 @@ namespace Restaurant_Application_CSharp_WPF
         {
             // refresh orders table
             dgOrders.ItemsSource = null; ;
-            dgOrders.ItemsSource = Services.GetOrderDetails(this.User.empId);
+            dgOrders.ItemsSource = Services.GetOrderDetailsActive(this.User.empId);
 
             // refresh Rest Table table
             dgTables.ItemsSource = null;
@@ -106,6 +106,36 @@ namespace Restaurant_Application_CSharp_WPF
         private void lblNotification_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             lblNotification.Visibility = Visibility.Collapsed;
+        }
+
+        private void dgOrdersNotActive_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            dynamic od = dgOrdersNotActive.SelectedItem;
+            int orderId = od.OrderNo;
+            int tableId = od.TableNo;
+            DateTime time = od.CreationTime;
+
+            OrderInfo ord = new OrderInfo(User, orderId, tableId, time);
+
+            ord.Show();
+        }
+
+       
+
+        private void btnShowClosedOrders_Checked(object sender, RoutedEventArgs e)
+        {
+            btnShowClosedOrders.Content = $"Close Inactive";
+            dgOrdersNotActive.ItemsSource = Services.GetOrderDetailsNotActive(this.User.empId);
+            tabClosedOrders.Visibility = Visibility.Visible;
+            tabControl.SelectedIndex = 1;
+        }
+
+        private void btnShowClosedOrders_Unchecked(object sender, RoutedEventArgs e)
+        {
+            btnShowClosedOrders.Content = $"Inactive Orders";
+            dgOrdersNotActive.ItemsSource = null;
+            tabClosedOrders.Visibility = Visibility.Collapsed;
+            tabControl.SelectedIndex = 0;
         }
     }
 }

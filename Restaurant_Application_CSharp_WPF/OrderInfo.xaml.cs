@@ -126,6 +126,24 @@ namespace Restaurant_Application_CSharp_WPF
                     }
                 }
 
+                // Change IsReady status to all true
+                using (RestaurantEntities restaurantEntities = new RestaurantEntities())
+                {
+                    // UPDATE MULTIPLE RECORDS AT ONCE
+                    (from od in restaurantEntities.OrderDetails
+                     where od.OrderID == this.OrderId
+                     select od).ToList().ForEach(x => x.IsReady = true);
+
+                    try
+                    {
+                        restaurantEntities.SaveChanges();
+                    }
+                    catch (DbUpdateException ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+                }
+
                 // Message 
                 MessageBox.Show($"Order No: {this.OrderId} Has Now Been Closed, and Table No: {this.TableId} Is Now Available", "Order Closed");
 

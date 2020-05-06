@@ -45,7 +45,7 @@
                FontSize="15" 
                Foreground="Blue" 
                Visibility="Collapsed" Panel.ZIndex="10">notification</Label>
-        <TabControl Grid.Row="1" Background="#FF83959B" SelectionChanged="TabControl_SelectionChanged" Margin="0,10">
+        <TabControl x:Name="tabControl" Grid.Row="1" Background="#FF83959B" SelectionChanged="TabControl_SelectionChanged" Margin="0,10">
             <TabItem Header="Orders" Background="#FF83959B">
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -96,11 +96,57 @@
                                     <Setter Property="CornerRadius" Value="5"/>
                                 </Style>
                             </Button.Resources>
-                        </Button>                        
+                        </Button>
+                        <ToggleButton x:Name="btnShowClosedOrders" Checked="btnShowClosedOrders_Checked" Unchecked="btnShowClosedOrders_Unchecked" Grid.Row="1" VerticalAlignment="Bottom" Height="30" Width="80" Content="Inactive Orders" Background="#FF1492B8">
+                            <ToggleButton.Resources>
+                                <Style TargetType="Border">
+                                    <Setter Property="CornerRadius" Value="5"/>
+                                </Style>
+                            </ToggleButton.Resources>
+                        </ToggleButton>                        
                     </Grid>
                 </Grid>
             </TabItem>
+            <TabItem Header="Closed Orders" x:Name="tabClosedOrders" Background="#FF83959B" Visibility="Collapsed">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="11*"></ColumnDefinition>
+                        <ColumnDefinition Width="2*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <DataGrid x:Name="dgOrdersNotActive" 
+                              MouseDoubleClick="dgOrdersNotActive_MouseDoubleClick"
+                              RowBackground="#FF83959B" 
+                              Background="#FF83959B" 
+                              AutoGenerateColumns="False" 
+                              AlternatingRowBackground="#FF9CB2B9"
+                              VerticalScrollBarVisibility="Auto" 
+                              IsReadOnly="True" 
+                              CanUserAddRows="False"
+                              SelectionMode="Single"
+                              CanUserResizeColumns="False"
+                              CanUserResizeRows="False"
+                              ScrollViewer.CanContentScroll="True">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Employee No" Binding="{Binding EmpId}" Width="*" Visibility="Collapsed"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Table No" Binding="{Binding TableNo}" Width="*"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Order No" Binding="{Binding OrderNo}" Width="*"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Time" Binding="{Binding CreationTime}" Width="*"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Employee" Binding="{Binding Employee}" Width="*"></DataGridTextColumn>
+                        </DataGrid.Columns>
 
+                    </DataGrid>
+                    <Grid Grid.Column="1" Margin="5">
+                        <Grid.RowDefinitions>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                    </Grid>
+                </Grid>
+            </TabItem>
             <TabItem Header="Tables" Background="#FF83959B" >
                 <Grid>
                     <Grid.ColumnDefinitions>
