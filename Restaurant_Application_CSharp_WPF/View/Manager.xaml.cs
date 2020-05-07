@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Restaurant_Application_CSharp_WPF.Model;
 using Restaurant_Application_CSharp_WPF.Service;
 
 namespace Restaurant_Application_CSharp_WPF.View
@@ -37,6 +39,9 @@ namespace Restaurant_Application_CSharp_WPF.View
             // Populata restaurant table
             dgTables.ItemsSource = Services.GetrestaurantTables();
 
+            // Populate Employees Table
+            dgEmployees.ItemsSource = Services.GetAllEmployees();
+
             User.RefreshWaiterPageEvent += User_RefreshWaiterPageEvent;
         }
 
@@ -53,6 +58,10 @@ namespace Restaurant_Application_CSharp_WPF.View
             // refresh Rest Table table
             dgTables.ItemsSource = null;
             dgTables.ItemsSource = Services.GetrestaurantTables();
+
+            // Refresh Employees Table
+            dgEmployees.ItemsSource = null;
+            dgEmployees.ItemsSource = Services.GetAllEmployees();
 
             // show notification
             lblNotification.Content = str;
@@ -142,6 +151,60 @@ namespace Restaurant_Application_CSharp_WPF.View
             dgOrdersNotActive.ItemsSource = Services.GetAllOrdersNotActive();
             tabClosedOrders.Visibility = Visibility.Collapsed;
             tabControl.SelectedIndex = 0;
+        }
+
+        // Create New Employee
+        private void btnNewEmployees_Click(object sender, RoutedEventArgs e)
+        {
+            string operationType = "New";
+
+            NewUpdateEmployee newUpdateEmployee = new NewUpdateEmployee(User, new Employee(), operationType);
+            newUpdateEmployee.Show();
+
+        }
+
+        // Update Employee
+        private void btnUpdateEmployees_Click(object sender, RoutedEventArgs e)
+        {
+            Employee emp = dgEmployees.SelectedItem as Employee;
+            string operationType = "Update";
+
+            NewUpdateEmployee newUpdateEmployee = new NewUpdateEmployee(User, emp, operationType);
+            newUpdateEmployee.Show();
+
+        }
+
+        // Delete Employee
+        private void btnDeleteEmployees_Checked(object sender, RoutedEventArgs e)
+        {
+            Employee employee = dgEmployees.SelectedItem as Employee;
+            int empid = employee.EmpID;
+
+            MessageBoxResult result = MessageBox.Show($"Are You Sure To Delete Employee {employee.FullName}?", "Delete Employee", MessageBoxButton.YesNo);
+            if(result == MessageBoxResult.Yes)
+            {
+                // Delete Employee
+                using (RestaurantEntities restaurantEntities = new RestaurantEntities())
+                {
+                    Employee emp = new Employee();
+                    emp = restaurantEntities.Employees.Find(empid);
+
+                    try
+                    {
+                        restaurantEntities.Employees.Remove(emp);
+                        restaurantEntities.SaveChanges();
+                        MessageBox.Show($"Employee {employee.FullName} Has Been Deleted");
+                        User.refreshingWaiterPage($"Employee {employee.FullName} Has Been Deleted");
+                    }
+                    catch (DbUpdateException ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+                }
+            }
+            
+            
+            
         }
     }
 }

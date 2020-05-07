@@ -19,7 +19,7 @@
                FontSize="15" 
                Foreground="Blue" 
                Visibility="Collapsed" Panel.ZIndex="10">notification</Label>
-        <TabControl x:Name="tabControl" Grid.Row="1" Background="#FF83959B" SelectionChanged="TabControl_SelectionChanged" Margin="0,10">
+        <TabControl x:Name="tabControl" Grid.Row="1" Background="#FF83959B" SelectionChanged="TabControl_SelectionChanged" Margin="0,30,0,0">
             <TabItem Header="Orders" Background="#FF83959B">
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -153,6 +153,7 @@
                 </Grid>
 
             </TabItem>
+            
         </TabControl>
 
         <Grid>

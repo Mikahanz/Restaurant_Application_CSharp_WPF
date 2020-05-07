@@ -127,15 +127,10 @@ namespace Restaurant_Application_CSharp_WPF
                 this.user.refreshingWaiterPage($"Item No {product.ProductNo} {product.ProductName} Has Been Removed From Order No {this.OrderId}");
             }
 
-            //MessageBox.Show($"{product.OrderDetailNo}");
+           
         }
 
-        // Update
-        //Employee employee = new Employee();
-        //employee = restaurantEntities.Employees.Find(106);
-
-        //employee.FullName = "Nolan Hanzel";           
-        //restaurantEntities.SaveChanges();
+        
         private void btnEditUpd_Click(object sender, RoutedEventArgs e)
         {
             dynamic productMenu = dgProductsUpd.SelectedItem;

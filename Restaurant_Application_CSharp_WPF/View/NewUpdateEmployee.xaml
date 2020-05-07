@@ -1,0 +1,83 @@
+﻿<Window x:Class="Restaurant_Application_CSharp_WPF.View.NewUpdateEmployee"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Restaurant_Application_CSharp_WPF.View"
+        mc:Ignorable="d"
+        Title="NewUpdateEmployee" Height="400" Width="500" Foreground="#FFFFFFFF" WindowStyle="None" Background="#FF83959B" WindowStartupLocation="CenterScreen">
+    <Grid Margin="10" Background="#FF83959B">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*"></RowDefinition>
+            <RowDefinition Height="10*"></RowDefinition>
+            
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"></ColumnDefinition>
+                <ColumnDefinition Width="4*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Label x:Name="lblFullName" Content="Full Name:" Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Right"></Label>
+            <TextBox x:Name="txbFullName" Grid.Column="1" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Left" Height="20" Width="200"></TextBox>
+            <Label x:Name="lblFNError" Grid.Column="1" Grid.Row="0" VerticalAlignment="Bottom" HorizontalAlignment="Left" Padding="0" FontSize="10" Foreground="Red" Visibility="Collapsed">Full Name Can Not Be Empty</Label>
+            <Label x:Name="lblUserName" Content="User Name:" Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Right"></Label>
+            <TextBox x:Name="txbUserName" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Left" Height="20" Width="200"></TextBox>
+            <Label x:Name="lblUNError" Grid.Column="1" Grid.Row="1" VerticalAlignment="Bottom" HorizontalAlignment="Left" Padding="0" FontSize="10" Foreground="Red" Visibility="Collapsed">User Name Can Not Be Empty</Label>
+            <Label x:Name="lblPassword" Content="Password:" Grid.Column="0" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Right"></Label>
+            <PasswordBox x:Name="pwdBox" Grid.Column="1" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Left" Height="20" Width="200"></PasswordBox>
+            <Label x:Name="lblPWError" Grid.Column="1" Grid.Row="2" VerticalAlignment="Bottom" HorizontalAlignment="Left" Padding="0" FontSize="10" Foreground="Red" Visibility="Collapsed">Password Can Not Be Empty</Label>
+
+
+            <Label x:Name="lblEmployeeType" Content="Employee Type:" Grid.Column="0" Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Right"></Label>
+            <ComboBox x:Name="cbEmpType" Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" Width="100"  SelectedIndex="0">
+                <ComboBoxItem>Waiter</ComboBoxItem>
+                <ComboBoxItem>Manager</ComboBoxItem>
+                <ComboBoxItem>Chef</ComboBoxItem>
+            </ComboBox>
+            <Button x:Name="btnSave" Click="btnSave_Click" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Left"  VerticalAlignment="Bottom" Height="30" Width="60" Content="Save" Background="#FF1492B8">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Button x:Name="btnUpdate" Click="btnUpdate_Click" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Left"  VerticalAlignment="Bottom" Height="30" Width="60" Content="Update" Margin="60,0" Background="#FF1492B8">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            
+        </Grid>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+        </Grid>
+        <Button x:Name="btnCloseNU" Click="btnCloseNU_Click" Grid.Row="0" Grid.Column="4" HorizontalAlignment="Right"  VerticalAlignment="Top" Height="30" Width="60" Content="Close" Background="#FF1492B8">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="10"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <TextBlock x:Name="tbPageTitleOD" Grid.Row="0" Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="30" Foreground="Black">New/Update</TextBlock>
+
+
+
+    </Grid>
+</Window>

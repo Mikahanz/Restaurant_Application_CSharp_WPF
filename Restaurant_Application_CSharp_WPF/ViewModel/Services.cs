@@ -303,5 +303,17 @@ namespace Restaurant_Application_CSharp_WPF.Service
 
             }
         }
+
+        // Get All Employees 
+        public static List<Employee> GetAllEmployees()
+        {
+            using(RestaurantEntities restaurantEntities = new RestaurantEntities())
+            {
+                List<Employee> emp = (from e in restaurantEntities.Employees
+                                      select e).ToList();
+
+                return emp;
+            }
+        }
     }
 }

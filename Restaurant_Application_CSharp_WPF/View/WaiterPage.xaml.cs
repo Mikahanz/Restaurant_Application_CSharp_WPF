@@ -141,5 +141,20 @@ namespace Restaurant_Application_CSharp_WPF
             tabClosedOrders.Visibility = Visibility.Collapsed;
             tabControl.SelectedIndex = 0;
         }
+
+        private void btnNewEmployees_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnUpdateEmployees_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnDeleteEmployees_Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

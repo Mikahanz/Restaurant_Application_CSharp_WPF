@@ -85,6 +85,9 @@
     <Compile Include="Model\OrderHeader.cs">
       <DependentUpon>RestaurantDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="View\NewUpdateEmployee.xaml.cs">
+      <DependentUpon>NewUpdateEmployee.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\OrderInfo.xaml.cs">
       <DependentUpon>OrderInfo.xaml</DependentUpon>
     </Compile>
@@ -145,6 +148,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\NewOrder.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\NewUpdateEmployee.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
