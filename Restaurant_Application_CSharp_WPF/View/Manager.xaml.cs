@@ -13,24 +13,26 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Restaurant_Application_CSharp_WPF.Service;
 
-namespace Restaurant_Application_CSharp_WPF
+namespace Restaurant_Application_CSharp_WPF.View
 {
-   
-    public partial class WaiterPage : Window
+    /// <summary>
+    /// Interaction logic for Manager.xaml
+    /// </summary>
+    public partial class Manager : Window
     {
         public UserLoginState User { get; set; }
-        public WaiterPage(UserLoginState user)
+        public Manager(UserLoginState user)
         {
             this.User = user;
 
             InitializeComponent();
-            
+
             lblEmpName.Content = $"Employee Name: { user.FullName}";
             lblEmpNo.Content = $"Employee No: {user.empId}";
             tbPageTitle.Text = user.EmployeeType;
 
             // populate order table
-            dgOrders.ItemsSource = Services.GetOrderDetailsActive(user.empId);
+            dgOrders.ItemsSource = Services.GetAllOrdersActive();
 
             // Populata restaurant table
             dgTables.ItemsSource = Services.GetrestaurantTables();
@@ -42,11 +44,11 @@ namespace Restaurant_Application_CSharp_WPF
         {
             // refresh orders table
             dgOrders.ItemsSource = null; ;
-            dgOrders.ItemsSource = Services.GetOrderDetailsActive(this.User.empId);
+            dgOrders.ItemsSource = Services.GetAllOrdersActive();
 
             // refresh unactive orders table
             dgOrdersNotActive.ItemsSource = null;
-            dgOrdersNotActive.ItemsSource = Services.GetOrderDetailsNotActive(this.User.empId);
+            dgOrdersNotActive.ItemsSource = Services.GetAllOrdersNotActive(); 
 
             // refresh Rest Table table
             dgTables.ItemsSource = null;
@@ -69,7 +71,7 @@ namespace Restaurant_Application_CSharp_WPF
             int tableId = od.TableNo;
             DateTime time = od.CreationTime;
 
-            OrderInfo ord = new OrderInfo(User,orderId, tableId, time);
+            OrderInfo ord = new OrderInfo(User, orderId, tableId, time);
 
             ord.Show();
         }
@@ -93,7 +95,7 @@ namespace Restaurant_Application_CSharp_WPF
             dynamic orderSelected = dgOrders.SelectedItem;
 
 
-            if(orderSelected != null)   // Datagrid selected
+            if (orderSelected != null)   // Datagrid selected
             {
                 int orderId = orderSelected.OrderNo;
                 int tableId = orderSelected.TableNo;
@@ -124,12 +126,12 @@ namespace Restaurant_Application_CSharp_WPF
             ord.Show();
         }
 
-       
+
 
         private void btnShowClosedOrders_Checked(object sender, RoutedEventArgs e)
         {
             btnShowClosedOrders.Content = $"Close Inactive";
-            dgOrdersNotActive.ItemsSource = Services.GetOrderDetailsNotActive(this.User.empId);
+            dgOrdersNotActive.ItemsSource = Services.GetAllOrdersNotActive();
             tabClosedOrders.Visibility = Visibility.Visible;
             tabControl.SelectedIndex = 1;
         }
@@ -137,7 +139,7 @@ namespace Restaurant_Application_CSharp_WPF
         private void btnShowClosedOrders_Unchecked(object sender, RoutedEventArgs e)
         {
             btnShowClosedOrders.Content = $"Inactive Orders";
-            dgOrdersNotActive.ItemsSource = Services.GetOrderDetailsNotActive(this.User.empId);
+            dgOrdersNotActive.ItemsSource = Services.GetAllOrdersNotActive();
             tabClosedOrders.Visibility = Visibility.Collapsed;
             tabControl.SelectedIndex = 0;
         }

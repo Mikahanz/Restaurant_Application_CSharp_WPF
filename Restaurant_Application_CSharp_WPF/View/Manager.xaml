@@ -1,12 +1,11 @@
-﻿<Window x:Class="Restaurant_Application_CSharp_WPF.WaiterPage"
+﻿<Window x:Class="Restaurant_Application_CSharp_WPF.View.Manager"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Restaurant_Application_CSharp_WPF"
+        xmlns:local="clr-namespace:Restaurant_Application_CSharp_WPF.View"
         mc:Ignorable="d"
-        Title="WaiterPage" Height="600" Width="700" Foreground="#FFFFFFFF" WindowStyle="None" Background="#FF83959B" WindowStartupLocation="CenterScreen">
-    
+        Title="Manager" Height="600" Width="700" Foreground="#FFFFFFFF" WindowStyle="None" Background="#FF83959B" WindowStartupLocation="CenterScreen">
     <Grid Margin="10" Background="#FF83959B">
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"></RowDefinition>
@@ -40,10 +39,11 @@
                               CanUserResizeRows="False"
                               ScrollViewer.CanContentScroll="True">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Employee No" Binding="{Binding EmpId}" Width="*" Visibility="Collapsed"></DataGridTextColumn>
-                            <DataGridTextColumn Header="Table No" Binding="{Binding TableNo}" Width="*"></DataGridTextColumn>
-                            <DataGridTextColumn Header="Order No" Binding="{Binding OrderNo}" Width="*"></DataGridTextColumn>
-                            <DataGridTextColumn Header="Time" Binding="{Binding CreationTime}" Width="*"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Emp No" Binding="{Binding EmpId}" Width=".75*" ></DataGridTextColumn>
+                            <DataGridTextColumn Header="Emp Name" Binding="{Binding EmpUserName}" Width="1.5*" ></DataGridTextColumn>
+                            <DataGridTextColumn Header="Table No" Binding="{Binding TableNo}" Width="1*"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Order No" Binding="{Binding OrderNo}" Width="1*"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Time" Binding="{Binding CreationTime}" Width="2*"></DataGridTextColumn>
                             <DataGridTextColumn Header="Employee" Binding="{Binding Employee}" Width="*"></DataGridTextColumn>
                         </DataGrid.Columns>
 
@@ -77,7 +77,7 @@
                                     <Setter Property="CornerRadius" Value="5"/>
                                 </Style>
                             </ToggleButton.Resources>
-                        </ToggleButton>                        
+                        </ToggleButton>
                     </Grid>
                 </Grid>
             </TabItem>
@@ -101,10 +101,11 @@
                               CanUserResizeRows="False"
                               ScrollViewer.CanContentScroll="True">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Employee No" Binding="{Binding EmpId}" Width="*" Visibility="Collapsed"></DataGridTextColumn>
-                            <DataGridTextColumn Header="Table No" Binding="{Binding TableNo}" Width="*"></DataGridTextColumn>
-                            <DataGridTextColumn Header="Order No" Binding="{Binding OrderNo}" Width="*"></DataGridTextColumn>
-                            <DataGridTextColumn Header="Time" Binding="{Binding CreationTime}" Width="*"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Emp No" Binding="{Binding EmpId}" Width=".75*" ></DataGridTextColumn>
+                            <DataGridTextColumn Header="Emp Name" Binding="{Binding EmpUserName}" Width="1.5*" ></DataGridTextColumn>
+                            <DataGridTextColumn Header="Table No" Binding="{Binding TableNo}" Width="1*"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Order No" Binding="{Binding OrderNo}" Width="1*"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Time" Binding="{Binding CreationTime}" Width="2*"></DataGridTextColumn>
                             <DataGridTextColumn Header="Employee" Binding="{Binding Employee}" Width="*"></DataGridTextColumn>
                         </DataGrid.Columns>
 
@@ -147,7 +148,7 @@
                             <DataGridTextColumn Width="*" Header="Capacity" Binding="{Binding Capacity}"/>
                             <DataGridTextColumn Width="*" Header="Availability"  Binding="{Binding Availability}"/>
                         </DataGrid.Columns>
-                        
+
                     </DataGrid>
 
                 </Grid>

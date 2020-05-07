@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Restaurant_Application_CSharp_WPF.Service;
+using Restaurant_Application_CSharp_WPF.View;
 
 namespace Restaurant_Application_CSharp_WPF
 {
@@ -62,12 +63,15 @@ namespace Restaurant_Application_CSharp_WPF
 
                 if (empType.Equals("Waiter"))
                 {
-                    
+                    WaiterPage waiterPage = new WaiterPage(user);
+                    waiterPage.Show();
                     this.Close();
                 }
                 else if (empType.Equals("Manager"))
                 {
-                    MessageBox.Show("manager page not yet made");
+                    Manager manager = new Manager(user);
+                    manager.Show();
+                    this.Close();
                 }
                 else if (empType.Equals("Chef"))
                 {

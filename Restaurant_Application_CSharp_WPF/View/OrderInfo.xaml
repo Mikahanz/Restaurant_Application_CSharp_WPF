@@ -82,6 +82,13 @@
                         </Style>
                     </Button.Resources>
                 </Button>
+                <Button x:Name="btnUndoCheckOut" Click="btnUndoCheckOut_Click" Grid.Row="2" VerticalAlignment="Top" HorizontalAlignment="Center" Height="30" Width="100"  Content="Undo CheckOut" Background="#FF1492B8">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="5"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
             </Grid>
 
         </Grid>

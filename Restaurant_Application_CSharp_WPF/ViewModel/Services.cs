@@ -88,7 +88,53 @@ namespace Restaurant_Application_CSharp_WPF.Service
 
         }
 
-        // GET Orders That Are Open
+        // Get orders that are active
+        public static dynamic GetAllOrdersActive()
+        {
+            using(RestaurantEntities restaurantEntities = new RestaurantEntities())
+            {
+                var orderDetailsJoin = (from oh in restaurantEntities.OrderHeaders
+                                        join e in restaurantEntities.Employees
+                                        on oh.EmpID equals e.EmpID
+                                        select new
+                                        {
+                                            EmpId = oh.EmpID,
+                                            EmpUserName = e.UserName,
+                                            TableNo = oh.TableID,
+                                            OrderNo = oh.OrderID,
+                                            CreationTime = oh.CreationTime,
+                                            Employee = e.EmployeType,
+                                            IsServing = oh.IsServing
+                                        }).Where((e) => e.IsServing == true);
+
+                return orderDetailsJoin.ToList();
+            }
+        }
+
+        // Get orders that are not active
+        public static dynamic GetAllOrdersNotActive()
+        {
+            using (RestaurantEntities restaurantEntities = new RestaurantEntities())
+            {
+                var orderDetailsJoin = (from oh in restaurantEntities.OrderHeaders
+                                        join e in restaurantEntities.Employees
+                                        on oh.EmpID equals e.EmpID
+                                        select new
+                                        {
+                                            EmpId = oh.EmpID,
+                                            EmpUserName = e.UserName,
+                                            TableNo = oh.TableID,
+                                            OrderNo = oh.OrderID,
+                                            CreationTime = oh.CreationTime,
+                                            Employee = e.EmployeType,
+                                            IsServing = oh.IsServing
+                                        }).Where((e) => e.IsServing == false);
+
+                return orderDetailsJoin.ToList();
+            }
+        }
+
+        // GET Orders That Are Active
         public static dynamic GetOrderDetailsActive(int empid)
         {
             using (RestaurantEntities restaurantEntities = new RestaurantEntities())
@@ -171,10 +217,23 @@ namespace Restaurant_Application_CSharp_WPF.Service
                                                 Quantity = od.Quantity,
                                                 EachPrice = p.Price,
                                                 Price = p.Price * od.Quantity,
-                                                Ready = od.IsReady
+                                                Ready = od.IsReady,
+                                                IsServing = oh.IsServing
                                             }).Where(x => x.OrderNo == orderId);
 
                 return orderDetailByOrderId.ToList();
+            }
+        }
+
+        // Get OrderHeader Single Record by OrderId
+        public static OrderHeader GetOrderHeaderByOrderId(int orderId)
+        {
+            using (RestaurantEntities restaurantEntities = new RestaurantEntities())
+            {
+                OrderHeader oh = new OrderHeader();
+                oh = restaurantEntities.OrderHeaders.Find(orderId);
+
+                return oh;
             }
         }
 

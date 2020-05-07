@@ -48,7 +48,6 @@ namespace Restaurant_Application_CSharp_WPF
 
             dgOrderDetail.ItemsSource = Services.GetOrderDetailByOrderId(orderId);      // Populate table
 
-
             this.SubPrice = Services.GetOrderTotalPrice(orderId); // Price
             lblSubTotalText.Content = this.SubPrice;               // SubTotalPrice Label
 
@@ -56,6 +55,20 @@ namespace Restaurant_Application_CSharp_WPF
             lblTotalText.Content = this.TotalPrice; // Total Price Label
 
             lblTimeText.Content = this.Time;
+
+            OrderHeader oh = new OrderHeader();
+            oh = Services.GetOrderHeaderByOrderId(orderId);            
+            if(oh.IsServing == false)
+            {
+                //MessageBox.Show("Is Not Serving");
+                btnCheckOut.Visibility = Visibility.Collapsed;
+                btnUndoCheckOut.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                //MessageBox.Show("Is serving");
+                btnUndoCheckOut.Visibility = Visibility.Collapsed;
+            }
 
             User.RefreshOrderInfoPageEvent += User_RefreshOrderInfoPageEvent;
         }
@@ -154,10 +167,7 @@ namespace Restaurant_Application_CSharp_WPF
                 // Close This window and open
                 this.Close();
             }
-            else
-            {
-                //MessageBox.Show("NOOOO");
-            }
+            
         }
 
         private void btnPrint_Click(object sender, RoutedEventArgs e)
@@ -169,6 +179,80 @@ namespace Restaurant_Application_CSharp_WPF
         private void lblNotification_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             lblNotification.Visibility = Visibility.Collapsed;
+        }
+
+        private void btnUndoCheckOut_Click(object sender, RoutedEventArgs e)
+        {
+            var result = MessageBox.Show("Are you sure you want to Undo CheckOut? Undo CheckOut Will Reopen The Order And Set All Order Items Status To Not Ready!", "Undo CheckOut", MessageBoxButton.YesNo);
+            if (result == MessageBoxResult.Yes)
+            {
+                // Check Out
+
+                // Change IsServing Status To True and Delete TotalPrice 
+                using (RestaurantEntities restaurantEntities = new RestaurantEntities())
+                {
+                    OrderHeader orderHeader = new OrderHeader();
+                    orderHeader = restaurantEntities.OrderHeaders.Find(this.OrderId);
+
+                    orderHeader.IsServing = true;  //IsServing Status To False
+                    orderHeader.TotalPrice = null; //Enter TotalPrice (Total bofore taxes)
+
+                    try
+                    {
+                        restaurantEntities.SaveChanges();
+                    }
+                    catch (DbUpdateException ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+                }
+
+                // Change RestaurantTable Availability to False
+                using (RestaurantEntities restaurantEntities = new RestaurantEntities())
+                {
+                    RestaurantTable restaurantTable = new RestaurantTable();
+                    restaurantTable = restaurantEntities.RestaurantTables.Find(this.TableId);
+
+                    restaurantTable.Availability = false;
+
+                    try
+                    {
+                        restaurantEntities.SaveChanges();
+                    }
+                    catch (DbUpdateException ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+                }
+
+                // Change IsReady status to all False
+                using (RestaurantEntities restaurantEntities = new RestaurantEntities())
+                {
+                    // UPDATE MULTIPLE RECORDS AT ONCE
+                    (from od in restaurantEntities.OrderDetails
+                     where od.OrderID == this.OrderId
+                     select od).ToList().ForEach(x => x.IsReady = false);
+
+                    try
+                    {
+                        restaurantEntities.SaveChanges();
+                    }
+                    catch (DbUpdateException ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+                }
+
+                // Message 
+                MessageBox.Show($"Order No: {this.OrderId} Has Now Been Reopened, and Table No: {this.TableId} Is Now Unavailable", "Order Reopened");
+
+                // Refresh WaiterPage Orders Table and Table Availability
+                this.User.refreshingWaiterPage($"Order No: {this.OrderId} Has Now Been Reopened, and Table No: {this.TableId} Is Now Unavailable");
+
+                // Close This window and open
+                this.Close();
+            }
+            
         }
     }
 }
