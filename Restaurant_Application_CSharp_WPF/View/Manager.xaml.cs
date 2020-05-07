@@ -166,12 +166,18 @@ namespace Restaurant_Application_CSharp_WPF.View
         // Update Employee
         private void btnUpdateEmployees_Click(object sender, RoutedEventArgs e)
         {
-            Employee emp = dgEmployees.SelectedItem as Employee;
-            string operationType = "Update";
+            if(dgEmployees.SelectedIndex < 0)
+            {
+                MessageBox.Show("Please Select Any Row That You Would Like To Update!", "Row Selection Required");
+            }
+            else
+            {
+                Employee emp = dgEmployees.SelectedItem as Employee;
+                string operationType = "Update";
 
-            NewUpdateEmployee newUpdateEmployee = new NewUpdateEmployee(User, emp, operationType);
-            newUpdateEmployee.Show();
-
+                NewUpdateEmployee newUpdateEmployee = new NewUpdateEmployee(User, emp, operationType);
+                newUpdateEmployee.Show();
+            }
         }
 
         // Delete Employee

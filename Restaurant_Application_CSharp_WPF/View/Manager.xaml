@@ -161,7 +161,6 @@
                         <ColumnDefinition Width="2*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <DataGrid x:Name="dgEmployees" 
-                              MouseDoubleClick="dgOrders_MouseDoubleClick" 
                               RowBackground="#FF83959B" 
                               Background="#FF83959B" 
                               AutoGenerateColumns="False" 

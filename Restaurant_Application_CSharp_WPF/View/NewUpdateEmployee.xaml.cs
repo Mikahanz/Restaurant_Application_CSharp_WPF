@@ -48,6 +48,8 @@ namespace Restaurant_Application_CSharp_WPF.View
                 pwdBox.Password = emp.Password;
 
             }
+
+            tbPageTitleNU.Text = operationType;
         }
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
