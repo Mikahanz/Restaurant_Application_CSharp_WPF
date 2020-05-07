@@ -17,9 +17,7 @@ using Restaurant_Application_CSharp_WPF.Service;
 
 namespace Restaurant_Application_CSharp_WPF
 {
-    /// <summary>
-    /// Interaction logic for KitchenStaff.xaml
-    /// </summary>
+    
     public partial class KitchenStaff : Window
     {
         private UserLoginState User { get; set; }
@@ -52,9 +50,9 @@ namespace Restaurant_Application_CSharp_WPF
                     try
                     {
                         restaurantEntities.SaveChanges();
-                        User.refreshingWaiterPage($"Order No: {product.OrderNo}({product.ProductName}) Is Ready To Be Served!");
+                        User.refreshingWaiterPage($"Order No: {product.OrderNo}, Product: ({product.ProductName}) Is Ready To Be Served!");
                         RefreshDGOnKitchenPage();
-                        lblNotification1.Content = $"Order No: {product.OrderNo}({product.ProductName}) Is Ready To Be Served!";
+                        lblNotification1.Content = $"Order No: {product.OrderNo}, Product: ({product.ProductName}) Is Ready To Be Served!";
                         lblNotification1.Visibility = Visibility.Visible;
                     }
                     catch(DbUpdateException ex)
@@ -100,9 +98,40 @@ namespace Restaurant_Application_CSharp_WPF
             }
         }
 
+        // Change The Status On OrderDetail IsReady - to FALSE (Which Means Not Ready)
         private void btnChangeOrderNotReady_Click(object sender, RoutedEventArgs e)
         {
+            dynamic product = dgHadBeenServed.SelectedItem;
 
+            if (product != null)
+            {
+                using (RestaurantEntities restaurantEntities = new RestaurantEntities())
+                {
+                    OrderDetail orderDetail = new OrderDetail();
+                    orderDetail = restaurantEntities.OrderDetails.Find(product.OrderDetailNo);
+
+                    orderDetail.IsReady = false;
+
+                    try
+                    {
+                        restaurantEntities.SaveChanges();
+                        User.refreshingWaiterPage($"Order No: {product.OrderNo}, Product: ({product.ProductName}) Is Not Ready!");
+                        RefreshDGOnKitchenPage();
+                        lblNotification1.Content = $"Order No: {product.OrderNo}, Product: ({product.ProductName}) Is Not Ready!";
+                        lblNotification1.Visibility = Visibility.Visible;
+                    }
+                    catch (DbUpdateException ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+                }
+
+                //MessageBox.Show($"{},{product.IsReady}");
+            }
+            else
+            {
+                MessageBox.Show($"Please Select Item To Be Updated!", "Item Selection Required");
+            }
         }
 
         public void RefreshDGOnKitchenPage()

@@ -62,8 +62,7 @@ namespace Restaurant_Application_CSharp_WPF
 
                 if (empType.Equals("Waiter"))
                 {
-                    WaiterPage waiterPage = new WaiterPage(user);
-                    waiterPage.Show();
+                    
                     this.Close();
                 }
                 else if (empType.Equals("Manager"))
@@ -72,6 +71,10 @@ namespace Restaurant_Application_CSharp_WPF
                 }
                 else if (empType.Equals("Chef"))
                 {
+                    // UnComment These 2 line for Notification demonstration when orders change status to be ready or not ready by Chef page
+                    //WaiterPage waiterPage = new WaiterPage(user);
+                    //waiterPage.Show();
+
                     KitchenStaff kitchenStaff = new KitchenStaff(user);
                     kitchenStaff.Show();
                     this.Close();
