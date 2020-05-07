@@ -10,6 +10,7 @@ namespace Restaurant_Application_CSharp_WPF.Service
 {
     public static class Services
     {
+        // Get Employee using password
         public static List<Employee> GetEmployee(string pin)
         {
             using (RestaurantEntities restaurantEntities = new RestaurantEntities())
@@ -21,6 +22,70 @@ namespace Restaurant_Application_CSharp_WPF.Service
             }
 
                 
+        }
+
+        // QUERY ALL RECORDS OF ORDERS THAT THAT ARE NOT READY - FOR KITCHEN STAFF
+        public static dynamic GetallOrdersThatNotReady()
+        {
+            using(RestaurantEntities restaurantEntities = new RestaurantEntities())
+            {
+                var allOrdersThatNotReady = from od in restaurantEntities.OrderDetails
+                                            join oh in restaurantEntities.OrderHeaders
+                                            on od.OrderID equals oh.OrderID
+                                            join e in restaurantEntities.Employees
+                                            on oh.EmpID equals e.EmpID
+                                            join p in restaurantEntities.Products
+                                            on od.ProductID equals p.ProductID
+                                            where od.IsReady == false
+                                            orderby oh.CreationTime descending
+                                            select new
+                                            {
+                                                OrderDetailNo = od.OrderDetailID,
+                                                OrderNo = od.OrderID,
+                                                ProductNo = p.ProductID,
+                                                ProductName = p.ProductName,
+                                                Quantity = od.Quantity,
+                                                UserName = e.UserName,
+                                                EmpNo = e.EmpID,
+                                                IsReady = od.IsReady,
+                                                CreationTime = oh.CreationTime
+                                            };
+
+                return allOrdersThatNotReady.ToList();
+            }
+            
+        }
+
+        // QUERY ALL RECORDS OF ORDERS THAT THAT ARE READY - FOR KITCHEN STAFF
+        public static dynamic GetallOrdersThatReady()
+        {
+            using (RestaurantEntities restaurantEntities = new RestaurantEntities())
+            {
+                var allOrdersThatNotReady = from od in restaurantEntities.OrderDetails
+                                            join oh in restaurantEntities.OrderHeaders
+                                            on od.OrderID equals oh.OrderID
+                                            join e in restaurantEntities.Employees
+                                            on oh.EmpID equals e.EmpID
+                                            join p in restaurantEntities.Products
+                                            on od.ProductID equals p.ProductID
+                                            where od.IsReady == true
+                                            orderby oh.CreationTime descending
+                                            select new
+                                            {
+                                                OrderDetailNo = od.OrderDetailID,
+                                                OrderNo = od.OrderID,
+                                                ProductNo = p.ProductID,
+                                                ProductName = p.ProductName,
+                                                Quantity = od.Quantity,
+                                                UserName = e.UserName,
+                                                EmpNo = e.EmpID,
+                                                IsReady = od.IsReady,
+                                                CreationTime = oh.CreationTime
+                                            };
+
+                return allOrdersThatNotReady.ToList();
+            }
+
         }
 
         // GET Orders That Are Open

@@ -5,8 +5,135 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Restaurant_Application_CSharp_WPF"
         mc:Ignorable="d"
-        Title="KitchenStaff" Height="450" Width="800">
-    <Grid>
-        
+        Title="KitchenStaff" Height="800" Width="1000" Foreground="#FFFFFFFF" WindowStyle="None" Background="#FF83959B" WindowStartupLocation="CenterScreen">
+
+    <Grid Margin="10" Background="#FF83959B">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="8*"></RowDefinition>
+            <RowDefinition Height="2*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <TabControl x:Name="tabControl" SelectionChanged="tabControl_SelectionChanged" Grid.Row="1" Background="#FF83959B" Margin="0,10">
+            <TabItem Header="ORDERS TO BE SERVED" x:Name="tabToBeServed" Background="#FF83959B" Visibility="Visible">
+                <Grid>
+                    <DataGrid x:Name="dgOrdersToBeServed" 
+                              RowBackground="#FF83959B" 
+                              Background="#FF83959B" 
+                              AutoGenerateColumns="False" 
+                              AlternatingRowBackground="#FF9CB2B9"
+                              VerticalScrollBarVisibility="Auto" 
+                              IsReadOnly="True" 
+                              CanUserAddRows="False"
+                              SelectionMode="Single"
+                              CanUserResizeColumns="False"
+                              CanUserResizeRows="False"
+                              ScrollViewer.CanContentScroll="True">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="OrderDetailNo" Binding="{Binding OrderDetailNo}" Width="1*" Visibility="Collapsed"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Order No" Binding="{Binding OrderNo}" Width="1*" ></DataGridTextColumn>
+                            <DataGridTextColumn Header="Prod No" Binding="{Binding ProductNo}" Width="1*" ></DataGridTextColumn>
+                            <DataGridTextColumn Header="Product Name" Binding="{Binding ProductName}" Width="6*"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Qty" Binding="{Binding Quantity}" Width=".5*"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Emp Name" Binding="{Binding UserName}" Width="1.5*"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Emp No" Binding="{Binding EmpNo}" Width="1*"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Is Ready" Binding="{Binding IsReady}" Width="*"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Time Created" Binding="{Binding CreationTime}" Width="2.5*"></DataGridTextColumn>
+                        </DataGrid.Columns>
+
+                    </DataGrid>
+                    <Grid Grid.Column="1" Margin="5">
+                        <Grid.RowDefinitions>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                    </Grid>
+                </Grid>
+            </TabItem>
+            <TabItem Header="ORDERS HAD BEEN SERVED" x:Name="tabHadBeenServed" Background="#FF83959B" Visibility="Visible">
+                <Grid>
+                    <DataGrid x:Name="dgHadBeenServed" 
+                              RowBackground="#FF83959B" 
+                              Background="#FF83959B" 
+                              AutoGenerateColumns="False" 
+                              AlternatingRowBackground="#FF9CB2B9"
+                              VerticalScrollBarVisibility="Auto" 
+                              IsReadOnly="True" 
+                              CanUserAddRows="False"
+                              SelectionMode="Single"
+                              CanUserResizeColumns="False"
+                              CanUserResizeRows="False"
+                              ScrollViewer.CanContentScroll="True">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="OrderDetailNo" Binding="{Binding OrderDetailNo}" Width="1*" Visibility="Collapsed"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Order No" Binding="{Binding OrderNo}" Width="1*" ></DataGridTextColumn>
+                            <DataGridTextColumn Header="Prod No" Binding="{Binding ProductNo}" Width="1*" ></DataGridTextColumn>
+                            <DataGridTextColumn Header="Product Name" Binding="{Binding ProductName}" Width="6*"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Qty" Binding="{Binding Quantity}" Width=".5*"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Emp Name" Binding="{Binding UserName}" Width="1.5*"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Emp No" Binding="{Binding EmpNo}" Width="1*"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Is Ready" Binding="{Binding IsReady}" Width="*"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Time Created" Binding="{Binding CreationTime}" Width="2.5*"></DataGridTextColumn>
+                        </DataGrid.Columns>
+
+                    </DataGrid>
+                    <Grid Grid.Column="1" Margin="5">
+                        <Grid.RowDefinitions>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                    </Grid>
+                </Grid>
+            </TabItem>
+        </TabControl>
+        <Label x:Name="lblNotification1" MouseDoubleClick="lblNotification1_MouseDoubleClick"
+              Grid.Row="2" HorizontalAlignment="Center" 
+               VerticalAlignment="Top" 
+               FontSize="15" 
+               Foreground="Blue" 
+               Visibility="Collapsed" Panel.ZIndex="10"
+               Margin="0,0,0,0">notification</Label>
+        <Button x:Name="btnChangeOrderReady" Click="btnChangeOrderReady_Click"  Grid.Row="2" HorizontalAlignment="Center"  VerticalAlignment="Bottom" Height="40" Width="150" Content="Order Ready" FontSize="20" Margin="0,0,0,20" Background="#FF1492B8">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="10"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <Button x:Name="btnChangeOrderNotReady" Click="btnChangeOrderNotReady_Click" Visibility="Hidden" Grid.Row="2" HorizontalAlignment="Center"  VerticalAlignment="Bottom" Height="40" Width="150" Content="Order Not Ready" FontSize="15" Margin="0,0,0,20" Background="#FF1492B8">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="10"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+        </Grid>
+        <Button x:Name="btnCloseWP" Click="btnCloseWP_Click"  Grid.Row="0" Grid.Column="4" HorizontalAlignment="Right"  VerticalAlignment="Top" Height="30" Width="60" Content="Close" Background="#FF1492B8">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="10"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <TextBlock x:Name="tbPageTitle" Grid.Row="0" Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="30" Foreground="Black">Emp Type</TextBlock>
+        <TextBlock x:Name="txtblkEmpName" Grid.Row="0" Grid.Column="1" VerticalAlignment="TOp" HorizontalAlignment="Left" FontSize="15" Foreground="Black" Margin="10,0,0,0">
+            <Label x:Name="lblEmpName" Content="Emp Name:"></Label>
+        </TextBlock>
+        <TextBlock x:Name="txtblkEmpNo" Grid.Row="0" Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Left" FontSize="15" Foreground="Black" Margin="10,0,0,0">
+            <Label x:Name="lblEmpNo" Content="Emp No:"></Label>
+        </TextBlock>
     </Grid>
 </Window>

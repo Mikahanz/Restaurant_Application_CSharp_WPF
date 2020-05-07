@@ -50,7 +50,7 @@ namespace Restaurant_Application_CSharp_WPF
         private void btnEnterLogin_Click(object sender, RoutedEventArgs e)
         {
             var emp = Services.GetEmployee(strPin);
-            if(emp.Count() == 1)
+            if (emp.Count() == 1)
             {
                 UserLoginState user = new UserLoginState();
                 user.empId = emp[0].EmpID;
@@ -58,9 +58,26 @@ namespace Restaurant_Application_CSharp_WPF
                 user.EmployeeType = emp[0].EmployeType;
                 user.Login();
 
-                WaiterPage waiterPage = new WaiterPage(user);
-                waiterPage.Show();
-                this.Close();
+                string empType = user.EmployeeType;
+
+                if (empType.Equals("Waiter"))
+                {
+                    WaiterPage waiterPage = new WaiterPage(user);
+                    waiterPage.Show();
+                    this.Close();
+                }
+                else if (empType.Equals("Manager"))
+                {
+                    MessageBox.Show("manager page not yet made");
+                }
+                else if (empType.Equals("Chef"))
+                {
+                    KitchenStaff kitchenStaff = new KitchenStaff(user);
+                    kitchenStaff.Show();
+                    this.Close();
+                }
+
+                
             }
             else
             {
