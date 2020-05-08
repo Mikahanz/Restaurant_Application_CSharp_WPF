@@ -315,5 +315,17 @@ namespace Restaurant_Application_CSharp_WPF.Service
                 return emp;
             }
         }
+
+        // Get All Products
+        public static List<Product> GetAllProducts()
+        {
+            using(RestaurantEntities restaurantEntities = new RestaurantEntities())
+            {
+                List<Product> products = (from p in restaurantEntities.Products
+                                          select p).ToList();
+
+                return products;
+            }
+        }
     }
 }

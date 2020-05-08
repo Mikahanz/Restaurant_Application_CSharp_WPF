@@ -49,7 +49,7 @@ namespace Restaurant_Application_CSharp_WPF.View
 
             }
 
-            tbPageTitleNU.Text = operationType;
+            tbPageTitleNU.Text = $"{operationType} Employee";
         }
 
         private void btnSave_Click(object sender, RoutedEventArgs e)

@@ -67,6 +67,7 @@
     <Compile Include="Model\Employee.cs">
       <DependentUpon>RestaurantDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\BooleanToYesNoConverter.cs" />
     <Compile Include="View\Invoice.xaml.cs">
       <DependentUpon>Invoice.xaml</DependentUpon>
     </Compile>
@@ -87,6 +88,9 @@
     </Compile>
     <Compile Include="View\NewUpdateEmployee.xaml.cs">
       <DependentUpon>NewUpdateEmployee.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\NewUpdateProduct.xaml.cs">
+      <DependentUpon>NewUpdateProduct.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\OrderInfo.xaml.cs">
       <DependentUpon>OrderInfo.xaml</DependentUpon>
@@ -152,6 +156,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\NewUpdateEmployee.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\NewUpdateProduct.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

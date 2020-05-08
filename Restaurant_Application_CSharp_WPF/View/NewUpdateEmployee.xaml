@@ -10,7 +10,6 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="2*"></RowDefinition>
             <RowDefinition Height="10*"></RowDefinition>
-            
         </Grid.RowDefinitions>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
@@ -36,8 +35,6 @@
             <Label x:Name="lblPassword" Content="Password:" Grid.Column="0" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Right"></Label>
             <PasswordBox x:Name="pwdBox" Grid.Column="1" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Left" Height="20" Width="200"></PasswordBox>
             <Label x:Name="lblPWError" Grid.Column="1" Grid.Row="2" VerticalAlignment="Bottom" HorizontalAlignment="Left" Padding="0" FontSize="10" Foreground="Red" Visibility="Collapsed">Password Can Not Be Empty</Label>
-
-
             <Label x:Name="lblEmployeeType" Content="Employee Type:" Grid.Column="0" Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Right"></Label>
             <ComboBox x:Name="cbEmpType" Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" Width="100"  SelectedIndex="0">
                 <ComboBoxItem>Waiter</ComboBoxItem>
@@ -58,9 +55,7 @@
                     </Style>
                 </Button.Resources>
             </Button>
-            
         </Grid>
-
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition></ColumnDefinition>
@@ -76,8 +71,5 @@
             </Button.Resources>
         </Button>
         <TextBlock x:Name="tbPageTitleNU" Grid.Row="0" Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="30" Foreground="Black">New/Update</TextBlock>
-
-
-
     </Grid>
 </Window>
