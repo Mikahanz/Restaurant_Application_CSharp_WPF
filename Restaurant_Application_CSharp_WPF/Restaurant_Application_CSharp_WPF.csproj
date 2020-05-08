@@ -211,7 +211,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Files\" />
+    <Folder Include="Files\RestaurantAppFiles\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\restaurantlogo.png" />
