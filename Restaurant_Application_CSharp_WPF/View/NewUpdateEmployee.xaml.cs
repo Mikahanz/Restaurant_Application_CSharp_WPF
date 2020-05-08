@@ -47,6 +47,24 @@ namespace Restaurant_Application_CSharp_WPF.View
                 txbUserName.Text = emp.UserName;
                 pwdBox.Password = emp.Password;
 
+                string empType = emp.EmployeType;
+
+                switch (empType)
+                {
+                    case "Waiter":
+                        cbEmpType.SelectedIndex = 0;
+                        break;
+                    case "Manager":
+                        cbEmpType.SelectedIndex = 1;
+                        break;
+                    case "Chef":
+                        cbEmpType.SelectedIndex = 2;
+                        break;
+                    default:
+                        MessageBox.Show("Pleace Select Emplyee Type");
+                        break;
+                }
+
             }
 
             tbPageTitleNU.Text = $"{operationType} Employee";

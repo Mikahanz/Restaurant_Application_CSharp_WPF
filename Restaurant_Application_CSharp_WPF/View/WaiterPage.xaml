@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Restaurant_Application_CSharp_WPF"
         mc:Ignorable="d"
-        Title="WaiterPage" Height="600" Width="700" Foreground="#FFFFFFFF" WindowStyle="None" Background="#FF83959B" WindowStartupLocation="CenterScreen">
+        Title="WaiterPage" Height="600" Width="700" Foreground="#FFFFFFFF" WindowStyle="None" Background="#FF83959B" WindowStartupLocation="Manual">
     
     <Grid Margin="10" Background="#FF83959B">
         <Grid.RowDefinitions>

@@ -77,7 +77,7 @@ namespace Restaurant_Application_CSharp_WPF.View
 
             }
 
-            tbPageTitleNU.Text = $"{operationType} Employee";
+            tbPageTitleNU.Text = $"{operationType} Product";
         }
 
         // Create New Product
@@ -114,8 +114,6 @@ namespace Restaurant_Application_CSharp_WPF.View
                     // The new next ProductID
                     int newProdId = restaurantEntities.Products.Max(x => x.ProductID) + 1;
 
-                    //MessageBox.Show($"{newProdId},{prodName}, {price}, {availability}, {prodType}");
-
                     Product product = new Product() { ProductID = newProdId, ProductName = prodName, Price = price, Availability = availability, ProductType = prodType };
 
                     MessageBoxResult result = MessageBox.Show($"Are you sure to add new Product {prodName}, As {prodType}?", "New Product", MessageBoxButton.YesNo);
@@ -124,13 +122,8 @@ namespace Restaurant_Application_CSharp_WPF.View
                     {
                         try
                         {
-                            
-
                             restaurantEntities.Products.Add(product);
                             restaurantEntities.SaveChanges();
-
-                            
-
                             MessageBox.Show($"Product {prodName}, As {prodType} Has Been Created!", "New Product Created");
                             this.User.refreshingWaiterPage($"Product {prodName}, As {prodType} Has Been Created!");
                         }
